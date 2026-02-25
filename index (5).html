@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BM 531 — Biomedical Instrumentation</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-blob blob1"></div>
+    <div class="hero-blob blob2"></div>
+    <div class="hero-blob blob3"></div>
+    <div class="hero-inner">
+      <span class="course-tag">BM 531</span>
+      <h1>Biomedical<br/><em>Instrumentation</em></h1>
+      <p class="hero-sub">Your visual study guide — from classification to quality control</p>
+      <div class="hero-pills">
+        <a href="#lecture1" class="pill">📋 Lecture 1</a>
+        <a href="#lecture2" class="pill">🔬 Lecture 2</a>
+        <a href="#clos" class="pill">🎯 CLOs</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- CLOs SECTION -->
+    <section id="clos" class="section">
+      <div class="section-header">
+        <span class="section-label">Course Overview</span>
+        <h2>Learning Objectives</h2>
+      </div>
+      <div class="clo-grid">
+        <div class="clo-card" style="--accent:#ffd6e7">
+          <div class="clo-num">CLO 1</div>
+          <div class="clo-tag">Cognitive · L2</div>
+          <p>Explain basic <strong>classification techniques</strong> & working principles of biomedical equipment</p>
+        </div>
+        <div class="clo-card" style="--accent:#d6f0ff">
+          <div class="clo-num">CLO 2</div>
+          <div class="clo-tag">Affective · L4</div>
+          <p>Conceptualize design of biomedical solutions using <strong>sensors, transducers & biopotentials</strong></p>
+        </div>
+        <div class="clo-card" style="--accent:#d6ffe8">
+          <div class="clo-num">CLO 3</div>
+          <div class="clo-tag">Psychomotor · P3</div>
+          <p>Construct <strong>operational prototypes</strong> using fundamental components & software tools</p>
+        </div>
+        <div class="clo-card" style="--accent:#fff3d6">
+          <div class="clo-num">CLO 4</div>
+          <div class="clo-tag">Cognitive · C5</div>
+          <p>Apply <strong>project management skills</strong> to develop engineering solutions for biomedical issues</p>
+        </div>
+        <div class="clo-card" style="--accent:#ead6ff">
+          <div class="clo-num">CLO 5</div>
+          <div class="clo-tag">Affective · A3</div>
+          <p>Justify sensor selection & <strong>critique alternatives</strong> with pros and cons</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LECTURE 1 -->
+    <section id="lecture1" class="section">
+      <div class="section-header">
+        <span class="section-label">Lecture 1</span>
+        <h2>Biomedical Equipment & Classification</h2>
+      </div>
+
+      <!-- What is BM Equipment -->
+      <div class="info-banner" style="--b:#ffd6e7;--bt:#ff8fab">
+        <div class="info-icon">🏥</div>
+        <div>
+          <h3>What is Biomedical Equipment?</h3>
+          <p>Devices used in healthcare for <strong>diagnosis, monitoring, treatment & rehabilitation</strong>. They apply engineering, physics, biology & medicine to support clinical decision-making.</p>
+        </div>
+      </div>
+
+      <!-- Why classify -->
+      <div class="why-grid">
+        <h3 class="why-title">Why Classify BM Equipment?</h3>
+        <div class="why-cards">
+          <div class="why-card">🔍<span>Understand function & application</span></div>
+          <div class="why-card">🛡️<span>Ensure patient safety</span></div>
+          <div class="why-card">⚙️<span>Simplify design & maintenance</span></div>
+          <div class="why-card">📚<span>Support clinical training</span></div>
+        </div>
+      </div>
+
+      <!-- Classification by Function -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">⚡</span>
+          <h3>Classification by <em>Function</em></h3>
+        </div>
+        <div class="function-grid">
+          <div class="fn-card" style="--c:#ffd6e7">
+            <div class="fn-emoji">🔍</div>
+            <h4>Diagnostic</h4>
+            <p>Detect diseases or medical conditions</p>
+            <div class="fn-examples">ECG · X-ray · MRI · Ultrasound</div>
+          </div>
+          <div class="fn-card" style="--c:#d6f0ff">
+            <div class="fn-emoji">📡</div>
+            <h4>Monitoring</h4>
+            <p>Continuously observe vital signs</p>
+            <div class="fn-examples">Patient Monitor · Pulse Oximeter · BP Monitor</div>
+          </div>
+          <div class="fn-card" style="--c:#d6ffe8">
+            <div class="fn-emoji">💊</div>
+            <h4>Therapeutic</h4>
+            <p>Treat or manage medical conditions</p>
+            <div class="fn-examples">Pacemaker · Defibrillator · Ventilator</div>
+          </div>
+          <div class="fn-card" style="--c:#fff3d6">
+            <div class="fn-emoji">🦾</div>
+            <h4>Rehabilitation</h4>
+            <p>Restore or improve physical function</p>
+            <div class="fn-examples">Prosthetics · Wheelchair · Physiotherapy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Invasiveness -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🩺</span>
+          <h3>Classification by <em>Invasiveness</em></h3>
+        </div>
+        <div class="invasive-spectrum">
+          <div class="inv-bar">
+            <div class="inv-item inv-low">
+              <div class="inv-dot"></div>
+              <h4>Non-Invasive</h4>
+              <p>Does not enter the body or break the skin</p>
+              <div class="inv-ex">ECG · BP Monitor · Pulse Ox · Ultrasound</div>
+            </div>
+            <div class="inv-line"></div>
+            <div class="inv-item inv-mid">
+              <div class="inv-dot"></div>
+              <h4>Minimally Invasive</h4>
+              <p>Enters the body but not implanted</p>
+              <div class="inv-ex">Catheter · Endoscope · Biopsy Needle</div>
+            </div>
+            <div class="inv-line"></div>
+            <div class="inv-item inv-high">
+              <div class="inv-dot"></div>
+              <h4>Invasive</h4>
+              <p>Implanted inside the body</p>
+              <div class="inv-ex">Stents · Pacemakers · Artificial Joints</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Risk -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">⚠️</span>
+          <h3>Classification by <em>Risk Level</em></h3>
+        </div>
+        <div class="risk-wrapper">
+          <div class="risk-col">
+            <div class="risk-header" style="--rc:#d6ffe8">🇺🇸 FDA (USA) / DRAP (PK)</div>
+            <div class="risk-card" style="--rc:#d6ffe8">
+              <div class="risk-badge low">Class I</div>
+              <div class="risk-label">Low Risk</div>
+              <p>Minimal risk, general controls only</p>
+              <div class="risk-ex">Tongue depressor · Bandages · Exam gloves</div>
+            </div>
+            <div class="risk-card" style="--rc:#fff3d6">
+              <div class="risk-badge mid">Class II</div>
+              <div class="risk-label">Moderate Risk</div>
+              <p>Requires special controls</p>
+              <div class="risk-ex">Infusion pump · BP monitor · ECG machine</div>
+            </div>
+            <div class="risk-card" style="--rc:#ffd6e7">
+              <div class="risk-badge high">Class III</div>
+              <div class="risk-label">High Risk</div>
+              <p>Sustains life or is implanted</p>
+              <div class="risk-ex">Pacemaker · Defibrillator · Heart valves</div>
+            </div>
+          </div>
+          <div class="risk-col">
+            <div class="risk-header" style="--rc:#ead6ff">🇬🇧 MDR (UK / EU)</div>
+            <div class="risk-card" style="--rc:#d6ffe8">
+              <div class="risk-badge low">Class I</div>
+              <div class="risk-label">Low Risk</div>
+              <p>Same as FDA Class I</p>
+              <div class="risk-ex">Basic non-contact devices</div>
+            </div>
+            <div class="risk-card" style="--rc:#d6f0ff">
+              <div class="risk-badge mida">Class IIa</div>
+              <div class="risk-label">Low–Medium Risk</div>
+              <p>Short-term or moderate risk</p>
+              <div class="risk-ex">Ultrasound · Hearing aids · Diagnostic catheters</div>
+            </div>
+            <div class="risk-card" style="--rc:#fff3d6">
+              <div class="risk-badge midb">Class IIb</div>
+              <div class="risk-label">Medium–High Risk</div>
+              <p>Higher risk or long-term use</p>
+              <div class="risk-ex">Ventilators · Infusion pumps · Dialysis</div>
+            </div>
+            <div class="risk-card" style="--rc:#ffd6e7">
+              <div class="risk-badge high">Class III</div>
+              <div class="risk-label">High Risk</div>
+              <p>Life-sustaining or implanted</p>
+              <div class="risk-ex">Pacemaker · Heart valves</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Energy Source -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🔋</span>
+          <h3>Classification by <em>Energy Source</em></h3>
+        </div>
+        <div class="energy-grid">
+          <div class="en-card" style="--ec:#ffd6e7">
+            <div class="en-icon">🌡️</div>
+            <h4>Thermal</h4>
+            <p>Uses heat energy</p>
+            <small>Diathermy unit · Incubator</small>
+          </div>
+          <div class="en-card" style="--ec:#d6f0ff">
+            <div class="en-icon">⚙️</div>
+            <h4>Mechanical</h4>
+            <p>Uses mechanical force / motion</p>
+            <small>Ventilator · Dialysis machine</small>
+          </div>
+          <div class="en-card" style="--ec:#fff3d6">
+            <div class="en-icon">⚡</div>
+            <h4>Electrical</h4>
+            <p>Uses electrical energy</p>
+            <small>ECG · Pacemaker</small>
+          </div>
+          <div class="en-card" style="--ec:#ead6ff">
+            <div class="en-icon">☢️</div>
+            <h4>Radiation</h4>
+            <p>Uses ionising / non-ionising radiation</p>
+            <small>X-ray · CT scanner</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Application -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🏥</span>
+          <h3>Classification by <em>Application Area</em></h3>
+        </div>
+        <div class="app-grid">
+          <div class="app-card">❤️<span class="app-name">Cardiology</span><span class="app-ex">ECG, Pacemaker</span></div>
+          <div class="app-card">🧠<span class="app-name">Neurology</span><span class="app-ex">EEG, MRI</span></div>
+          <div class="app-card">🦴<span class="app-name">Orthopedics</span><span class="app-ex">X-ray, Prosthetics</span></div>
+          <div class="app-card">📡<span class="app-name">Radiology</span><span class="app-ex">CT, Ultrasound</span></div>
+          <div class="app-card">🚨<span class="app-name">Intensive Care</span><span class="app-ex">Ventilators, Monitors</span></div>
+          <div class="app-card">🦽<span class="app-name">Rehabilitation</span><span class="app-ex">Wheelchairs, Physio</span></div>
+        </div>
+      </div>
+
+      <!-- Basic Principles -->
+      <div class="principle-block">
+        <div class="classify-title">
+          <span class="classify-icon">🔬</span>
+          <h3>Basic Principles of BM Equipment</h3>
+        </div>
+        <div class="pipeline">
+          <div class="pipe-step" style="--ps:#ffd6e7">
+            <div class="pipe-num">1</div>
+            <div class="pipe-icon">🧬</div>
+            <div class="pipe-label">Patient</div>
+            <div class="pipe-desc">Biological signals: ECG, temp, pressure</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#d6f0ff">
+            <div class="pipe-num">2</div>
+            <div class="pipe-icon">📡</div>
+            <div class="pipe-label">Sensors / Transducers</div>
+            <div class="pipe-desc">Convert biological → electrical signals</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#d6ffe8">
+            <div class="pipe-num">3</div>
+            <div class="pipe-icon">🎛️</div>
+            <div class="pipe-label">Signal Conditioning</div>
+            <div class="pipe-desc">Amplify & filter the signals</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#fff3d6">
+            <div class="pipe-num">4</div>
+            <div class="pipe-icon">💻</div>
+            <div class="pipe-label">Processing</div>
+            <div class="pipe-desc">Analyse & interpret data</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#ead6ff">
+            <div class="pipe-num">5</div>
+            <div class="pipe-icon">📺</div>
+            <div class="pipe-label">Display / Recording</div>
+            <div class="pipe-desc">Show results accurately & safely</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- LECTURE 2 -->
+    <section id="lecture2" class="section">
+      <div class="section-header">
+        <span class="section-label">Lecture 2</span>
+        <h2>Quality Assurance & Quality Control</h2>
+      </div>
+
+      <!-- Why QA/QC matters -->
+      <div class="info-banner" style="--b:#d6f0ff;--bt:#5ba8d4">
+        <div class="info-icon">⚠️</div>
+        <div>
+          <h3>Why does it matter?</h3>
+          <p>Equipment malfunctions can cause <strong>incorrect diagnosis, ineffective treatment,</strong> or <strong>patient harm</strong>. QA & QC are essential in healthcare technology management.</p>
+        </div>
+      </div>
+
+      <!-- QA vs QC comparison -->
+      <div class="compare-block">
+        <div class="compare-card" style="--cc:#d6ffe8">
+          <div class="compare-icon">🛡️</div>
+          <h3>Quality Assurance (QA)</h3>
+          <div class="compare-def">A <strong>planned & systematic</strong> process ensuring equipment consistently meets quality & safety standards</div>
+          <div class="compare-tags">
+            <span>✅ Prevents defects</span>
+            <span>🔄 Process-oriented</span>
+            <span>🚀 Proactive</span>
+          </div>
+        </div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-card" style="--cc:#ffd6e7">
+          <div class="compare-icon">🔍</div>
+          <h3>Quality Control (QC)</h3>
+          <div class="compare-def"><strong>Operational techniques & testing</strong> used to verify that equipment meets specified standards</div>
+          <div class="compare-tags">
+            <span>🔎 Detects defects</span>
+            <span>📦 Product-oriented</span>
+            <span>⚡ Reactive</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Defects -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🚨</span>
+          <h3>Common Defects in Medical Equipment</h3>
+        </div>
+        <div class="defect-list">
+          <div class="defect-item" style="--dc:#ffd6e7">
+            <span class="defect-icon">⚡</span>
+            <div>
+              <strong>Electrical Defects</strong>
+              <p>Power issues, line noise (noise from supply)</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#d6f0ff">
+            <span class="defect-icon">⚙️</span>
+            <div>
+              <strong>Mechanical Defects</strong>
+              <p>Motor failure, wear and tear</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#d6ffe8">
+            <span class="defect-icon">💻</span>
+            <div>
+              <strong>Software Defects</strong>
+              <p>System crashes, firmware bugs</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#fff3d6">
+            <span class="defect-icon">📊</span>
+            <div>
+              <strong>Measurement Errors</strong>
+              <p>Inaccurate readings, signal errors</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#ead6ff">
+            <span class="defect-icon">🌧️</span>
+            <div>
+              <strong>Environmental Damage</strong>
+              <p>Corrosion, dust accumulation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">📊</span>
+          <h3>Key Performance Indicators (KPIs)</h3>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card" style="--kc:#ffd6e7">
+            <div class="kpi-icon">🎯</div>
+            <h4>Precision</h4>
+            <p>Ability to produce <strong>consistent</strong> results repeatedly</p>
+          </div>
+          <div class="kpi-card" style="--kc:#d6f0ff">
+            <div class="kpi-icon">✅</div>
+            <h4>Accuracy</h4>
+            <p>Closeness of measurement to the <strong>true value</strong></p>
+          </div>
+          <div class="kpi-card" style="--kc:#d6ffe8">
+            <div class="kpi-icon">🔬</div>
+            <h4>Sensitivity</h4>
+            <p>Ability to detect <strong>small changes</strong> in measurement</p>
+          </div>
+          <div class="kpi-card" style="--kc:#fff3d6">
+            <div class="kpi-icon">🔁</div>
+            <h4>Repeatability</h4>
+            <p>Same result under <strong>identical conditions</strong></p>
+          </div>
+          <div class="kpi-card" style="--kc:#ead6ff">
+            <div class="kpi-icon">⏱️</div>
+            <h4>Response Time</h4>
+            <p>Time taken to <strong>respond to an input</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Methods to test KPIs -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🧪</span>
+          <h3>Methods to Test KPIs</h3>
+        </div>
+        <div class="method-steps">
+          <div class="method-step" style="--ms:#ffd6e7">
+            <div class="ms-num">1</div>
+            <div class="ms-content">
+              <strong>Functional Testing</strong>
+              <p>Verify the device performs its intended function correctly</p>
+            </div>
+          </div>
+          <div class="method-step" style="--ms:#d6f0ff">
+            <div class="ms-num">2</div>
+            <div class="ms-content">
+              <strong>Electrical Safety Testing</strong>
+              <p>Check leakage current, insulation resistance & grounding</p>
+            </div>
+          </div>
+          <div class="method-step" style="--ms:#d6ffe8">
+            <div class="ms-num">3</div>
+            <div class="ms-content">
+              <strong>Comparison with Reference Standards</strong>
+              <p>Calibrate against gold-standard known-value instruments</p>
+            </div>
+          </div>
+          <div class="method-step" style="--ms:#fff3d6">
+            <div class="ms-num">4</div>
+            <div class="ms-content">
+              <strong>Use of Analysers & Simulators</strong>
+              <p>Simulate patient signals to test device response</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>BM 531 · Biomedical Instrumentation · Study Notes</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
