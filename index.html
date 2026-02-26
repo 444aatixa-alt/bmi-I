@@ -310,474 +310,533 @@
           </div>
         </div>
       </div>
+
 <!-- =====================================================
-     LECTURE 1 QUIZ — paste this AFTER your Lecture 1
-     section ends (before the Lecture 2 section div)
+     LECTURE 1 QUIZ — paste inside your Lecture 1 .section
+     div, after the last content block, before </section>
      ===================================================== -->
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-  /* ── Chain ordering blocks (Q9) ── */
-  .q-drag-block {
-    background: rgba(255,255,255,0.05);
-    border: 1.5px solid rgba(99,179,237,0.25);
-    border-radius: 10px;
-    color: #cbd5e0;
-    font-size: .92rem;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    padding: .65rem 1rem;
-    cursor: grab;
-    user-select: none;
-    transition: background .15s, border .15s, transform .15s;
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    touch-action: none;
-  }
-  .q-drag-block:active  { cursor: grabbing; transform: scale(1.02); }
-  .q-drag-block.dragging  { opacity: .4; border: 1.5px dashed #63b3ed; }
-  .q-drag-block.drag-over { background: rgba(99,179,237,0.15); border-color: #63b3ed; }
+/* ── Quiz wrapper ── */
+#lecture1-quiz {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 2.8rem 2.4rem;
+  margin: 56px 0 0;
+  width: 100%;
+  font-family: 'Sora', sans-serif;
+  color: #2d2d3a;
+  box-shadow: 0 6px 32px rgba(100,60,180,.1);
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(168,85,247,.1);
+}
+/* soft purple blob in corner — mirrors site's hero blobs */
+#lecture1-quiz::before {
+  content: '';
+  position: absolute;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: rgba(234,214,255,.55);
+  top: -140px; right: -120px;
+  filter: blur(70px);
+  pointer-events: none;
+}
+#lecture1-quiz::after {
+  content: '';
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(214,240,255,.6);
+  bottom: -100px; left: -80px;
+  filter: blur(60px);
+  pointer-events: none;
+}
 
-  /* ── Match cells (Q3) ── */
-  .match-cell {
-    border-radius: 10px;
-    font-size: .83rem;
-    font-weight: 600;
-    font-family: 'Nunito', sans-serif;
-    padding: .6rem .75rem;
-    text-align: center;
-    line-height: 1.35;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 58px;
-  }
-  .match-cell.fixed {
-    background: rgba(99,179,237,0.1);
-    border: 1.5px solid rgba(99,179,237,0.3);
-    color: #a0c4f1;
-  }
-  .match-cell.moveable {
-    background: rgba(255,255,255,0.05);
-    border: 1.5px solid rgba(99,179,237,0.2);
-    color: #cbd5e0;
-  }
+/* ── Progress bar ── */
+#q-progress-bar-track {
+  background: rgba(168,85,247,.1);
+  border-radius: 99px;
+  height: 5px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+#q-progress-bar {
+  height: 100%;
+  width: 10%;
+  background: linear-gradient(90deg, #a855f7, #22d3ee);
+  border-radius: 99px;
+  transition: width .4s ease;
+}
 
-  /* ── Shared correct/wrong states ── */
-  .correct-block { background: rgba(72,187,120,0.2)  !important; border-color: #48bb78 !important; color: #9ae6b4 !important; cursor: default !important; }
-  .wrong-block   { background: rgba(252,129,74,0.15) !important; border-color: #fc814a !important; color: #fbd38d !important; cursor: default !important; }
+/* ── Question type badge ── */
+.q-badge {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: .25rem .8rem;
+  border-radius: 99px;
+}
+.q-badge.MCQ      { background: #ead6ff; color: #7c3aed; }
+.q-badge.TF       { background: #d6f0ff; color: #0891b2; }
+.q-badge.Ordering { background: #fff3d6; color: #b45309; }
+.q-badge.Matching { background: #d6ffe8; color: #059669; }
 
-  /* ── UD buttons ── */
-  .ud-btn {
-    background: rgba(99,179,237,0.12);
-    border: 1px solid rgba(99,179,237,0.25);
-    border-radius: 6px;
-    color: #63b3ed;
-    font-size: .8rem;
-    cursor: pointer;
-    padding: .18rem .4rem;
-    line-height: 1;
-    font-family: 'Nunito', sans-serif;
-    transition: background .15s;
-    flex-shrink: 0;
-  }
-  .ud-btn:hover  { background: rgba(99,179,237,0.25); }
-  .ud-btn:disabled { opacity: .35; cursor: default; }
+/* ── MCQ option buttons ── */
+.q-option-btn {
+  width: 100%;
+  background: #fdf8ff;
+  border: 1.5px solid rgba(168,85,247,.2);
+  border-radius: 14px;
+  color: #3d3550;
+  font-size: .92rem;
+  font-weight: 500;
+  font-family: 'Sora', sans-serif;
+  padding: .8rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .1s, box-shadow .15s;
+  display: block;
+  box-shadow: 0 2px 8px rgba(168,85,247,.06);
+}
+.q-option-btn:hover {
+  background: #f3e8ff;
+  border-color: #a855f7;
+  transform: translateX(3px);
+  box-shadow: 0 4px 16px rgba(168,85,247,.14);
+}
+.q-opt-correct { background: #d6ffe8 !important; border-color: #059669 !important; color: #065f46 !important; cursor:default; transform:none !important; box-shadow:none !important; }
+.q-opt-wrong   { background: #ffe4e4 !important; border-color: #ef4444 !important; color: #991b1b !important; cursor:default; transform:none !important; box-shadow:none !important; }
 
-  /* ── Check/action button ── */
-  .q-check-btn {
-    background: linear-gradient(135deg,#63b3ed,#4fd1c5);
-    color: #0f1923; border: none; border-radius: 10px;
-    padding: .7rem 1.6rem; font-size: .95rem; font-weight: 700;
-    font-family: 'Nunito', sans-serif; cursor: pointer;
-    margin-top: 1.1rem; transition: opacity .2s; width: 100%;
-  }
-  .q-check-btn:hover { opacity: .85; }
+/* ── Drag blocks (Q9) ── */
+.q-drag-block {
+  background: #fdf8ff;
+  border: 1.5px solid rgba(168,85,247,.22);
+  border-radius: 12px;
+  color: #3d3550;
+  font-size: .9rem;
+  font-weight: 600;
+  font-family: 'Sora', sans-serif;
+  padding: .7rem 1rem;
+  cursor: grab;
+  user-select: none;
+  transition: background .15s, border .15s, transform .12s, box-shadow .15s;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  touch-action: none;
+  box-shadow: 0 2px 8px rgba(168,85,247,.07);
+}
+.q-drag-block:active    { cursor: grabbing; transform: scale(1.02); }
+.q-drag-block.dragging  { opacity: .4; border: 1.5px dashed #a855f7; box-shadow: none; }
+.q-drag-block.drag-over { background: #f3e8ff; border-color: #a855f7; }
+
+/* ── Match cells (Q3) ── */
+.match-cell {
+  border-radius: 12px;
+  font-size: .8rem;
+  font-weight: 600;
+  font-family: 'Sora', sans-serif;
+  padding: .6rem .75rem;
+  text-align: center;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+}
+.match-cell.fixed    { background: #ead6ff; border: 1.5px solid rgba(168,85,247,.35); color: #6d28d9; }
+.match-cell.moveable { background: #fdf8ff; border: 1.5px solid rgba(168,85,247,.2);  color: #3d3550; box-shadow: 0 2px 6px rgba(168,85,247,.07); }
+
+/* ── Shared correct / wrong ── */
+.correct-block { background: #d6ffe8 !important; border-color: #059669 !important; color: #065f46 !important; cursor:default !important; }
+.wrong-block   { background: #ffe4e4 !important; border-color: #ef4444 !important; color: #991b1b !important; cursor:default !important; }
+
+/* ── UD buttons ── */
+.ud-btn {
+  background: #ead6ff;
+  border: 1px solid rgba(168,85,247,.3);
+  border-radius: 7px;
+  color: #7c3aed;
+  font-size: .78rem;
+  cursor: pointer;
+  padding: .2rem .42rem;
+  line-height: 1;
+  font-family: 'Sora', sans-serif;
+  transition: background .15s;
+  flex-shrink: 0;
+}
+.ud-btn:hover    { background: #dab4fe; }
+.ud-btn:disabled { opacity: .3; cursor: default; }
+
+/* ── Check / primary button ── */
+.q-check-btn {
+  background: linear-gradient(135deg, #a855f7, #22d3ee);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: .75rem 1.6rem;
+  font-size: .92rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  cursor: pointer;
+  margin-top: 1.1rem;
+  transition: opacity .2s, transform .15s, box-shadow .15s;
+  width: 100%;
+  box-shadow: 0 4px 18px rgba(168,85,247,.25);
+}
+.q-check-btn:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(168,85,247,.35); }
+
+/* ── Feedback box ── */
+#q-feedback {
+  display: none;
+  margin-top: 1.1rem;
+  padding: .85rem 1.15rem;
+  border-radius: 12px;
+  font-size: .87rem;
+  font-weight: 600;
+  line-height: 1.6;
+  font-family: 'Sora', sans-serif;
+}
+#q-feedback.fb-correct { background: #d6ffe8; border: 1.5px solid #6ee7b7; color: #065f46; }
+#q-feedback.fb-wrong   { background: #ffe4e4; border: 1.5px solid #fca5a5; color: #991b1b; }
+
+/* ── Next button ── */
+#q-next-btn {
+  display: none;
+  background: linear-gradient(135deg, #a855f7, #22d3ee);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: .65rem 1.8rem;
+  font-size: .92rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  cursor: pointer;
+  transition: opacity .2s, transform .15s, box-shadow .15s;
+  margin-top: 1.4rem;
+  float: right;
+  box-shadow: 0 4px 18px rgba(168,85,247,.22);
+}
+#q-next-btn:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(168,85,247,.32); }
+
+/* ── Score screen ── */
+#q-score-screen { display:none; text-align:center; padding:1rem 0; }
+#q-score-text {
+  font-size: 3.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a855f7, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: .5rem 0;
+}
+#q-score-msg { color: #6b6b80; font-size: .95rem; margin: .5rem 0 1.6rem; }
+
+.q-restart-btn {
+  background: #ead6ff;
+  color: #7c3aed;
+  border: 1.5px solid rgba(168,85,247,.3);
+  border-radius: 12px;
+  padding: .65rem 1.8rem;
+  font-size: .9rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  cursor: pointer;
+  transition: background .2s, box-shadow .2s;
+  box-shadow: 0 2px 10px rgba(168,85,247,.12);
+}
+.q-restart-btn:hover { background: #dab4fe; box-shadow: 0 4px 16px rgba(168,85,247,.22); }
+
+/* ── Hint text ── */
+.q-hint {
+  color: #9a8fb5;
+  font-size: .78rem;
+  font-style: italic;
+  margin: 0 0 .8rem;
+}
+
+/* ── Match col headers ── */
+.match-col-hdr {
+  color: #a855f7;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  text-align: center;
+  padding: .2rem 0 .3rem;
+}
+
+/* clearfix */
+.q-nav-row::after { content:''; display:table; clear:both; }
 </style>
 
-<section id="lecture1-quiz" style="
-  background: linear-gradient(135deg, #0f1923 0%, #1a2535 100%);
-  border: 1px solid rgba(99,179,237,0.2);
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  margin: 56px 0 0 0;
-  width: 100%;
-  font-family: 'Nunito', sans-serif;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-">
+<!-- ── Quiz section ── -->
+<div id="lecture1-quiz">
+
   <!-- Header -->
-  <div style="text-align:center; margin-bottom:2rem;">
-    <div style="font-size:2rem; margin-bottom:.5rem;">🧠</div>
-    <h2 style="color:#63b3ed;font-size:1.5rem;font-weight:700;margin:0 0 .4rem;letter-spacing:.5px;">Lecture 1 Quiz</h2>
-    <p style="color:#8ea4c8;font-size:.9rem;margin:0;">10 questions · MCQ, True/False, Ordering &amp; Matching</p>
+  <div style="margin-bottom:1.8rem;position:relative;z-index:1;">
+    <div style="font-size:1.1rem;font-weight:800;letter-spacing:-.3px;margin-bottom:.25rem;color:#2d2d3a;">🧠 Lecture 1 Quiz</div>
+    <div style="color:#9a8fb5;font-size:.82rem;">10 questions · MCQ · True/False · Ordering · Matching</div>
   </div>
 
-  <!-- Progress bar -->
-  <div style="background:rgba(255,255,255,0.07);border-radius:99px;height:6px;margin-bottom:2rem;overflow:hidden;">
-    <div id="q-progress-bar" style="height:100%;width:10%;background:linear-gradient(90deg,#63b3ed,#4fd1c5);border-radius:99px;transition:width .4s ease;"></div>
-  </div>
+  <!-- Progress -->
+  <div id="q-progress-bar-track" style="position:relative;z-index:1;"><div id="q-progress-bar"></div></div>
 
-  <!-- Counter + badge -->
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;">
-    <span id="q-counter" style="color:#8ea4c8;font-size:.85rem;font-weight:600;">Question 1 of 10</span>
-    <span id="q-type-badge" style="background:rgba(99,179,237,0.15);color:#63b3ed;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:99px;letter-spacing:.5px;text-transform:uppercase;">MCQ</span>
+  <!-- Counter row -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;position:relative;z-index:1;">
+    <span id="q-counter" style="color:#9a8fb5;font-size:.8rem;font-weight:600;">Question 1 of 10</span>
+    <span id="q-type-badge"></span>
   </div>
 
   <!-- Question text -->
-  <div id="q-text" style="color:#e2e8f0;font-size:1.05rem;font-weight:600;line-height:1.6;margin-bottom:1.4rem;min-height:52px;"></div>
+  <div id="q-text" style="font-size:1rem;font-weight:600;line-height:1.65;margin-bottom:1.4rem;min-height:48px;color:#2d2d3a;position:relative;z-index:1;"></div>
 
-  <!-- Options area -->
-  <div id="q-options" style="display:flex;flex-direction:column;gap:.75rem;"></div>
+  <!-- Options -->
+  <div id="q-options" style="display:flex;flex-direction:column;gap:.65rem;position:relative;z-index:1;"></div>
 
   <!-- Feedback -->
-  <div id="q-feedback" style="display:none;margin-top:1.2rem;padding:.9rem 1.2rem;border-radius:12px;font-size:.88rem;font-weight:600;line-height:1.55;"></div>
+  <div id="q-feedback" style="position:relative;z-index:1;"></div>
 
-  <!-- Next button -->
-  <div style="text-align:right;margin-top:1.5rem;">
-    <button id="q-next-btn" onclick="nextQuestion()" style="
-      display:none;background:linear-gradient(135deg,#63b3ed,#4fd1c5);
-      color:#0f1923;border:none;border-radius:10px;padding:.7rem 1.8rem;
-      font-size:.95rem;font-weight:700;font-family:'Nunito',sans-serif;
-      cursor:pointer;transition:opacity .2s;
-    " onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Next →</button>
+  <!-- Nav row -->
+  <div class="q-nav-row" style="position:relative;z-index:1;">
+    <button id="q-next-btn" onclick="nextQuestion()">Next →</button>
   </div>
 
   <!-- Score screen -->
-  <div id="q-score-screen" style="display:none;text-align:center;padding:1rem 0;">
-    <div style="font-size:3rem;margin-bottom:1rem;">🏆</div>
-    <h3 style="color:#63b3ed;font-size:1.4rem;font-weight:700;margin:0 0 .5rem;">Quiz Complete!</h3>
-    <div id="q-score-text" style="font-size:3rem;font-weight:800;color:#4fd1c5;margin:.5rem 0;"></div>
-    <p id="q-score-msg" style="color:#8ea4c8;font-size:.95rem;margin:.5rem 0 1.5rem;"></p>
-    <button onclick="restartQuiz()" style="
-      background:rgba(99,179,237,0.15);color:#63b3ed;
-      border:1px solid rgba(99,179,237,0.3);border-radius:10px;
-      padding:.65rem 1.6rem;font-size:.9rem;font-weight:700;
-      font-family:'Nunito',sans-serif;cursor:pointer;
-    ">🔄 Restart Quiz</button>
+  <div id="q-score-screen" style="position:relative;z-index:1;">
+    <div style="font-size:2.6rem;margin-bottom:.8rem;">🏆</div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:.3rem;color:#2d2d3a;">Quiz Complete!</div>
+    <div id="q-score-text"></div>
+    <p id="q-score-msg"></p>
+    <button class="q-restart-btn" onclick="restartQuiz()">🔄 Restart Quiz</button>
   </div>
-</section>
+</div>
 
 <script>
 (function(){
 
-  /* ── helpers ── */
-  function shuffle(arr) {
-    const a=[...arr];
-    for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
-    return a;
-  }
+  function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-  /* ── constants ── */
-  const MATCH_IDX = 2;
-  const DRAG_IDX  = 8;
+  const MATCH_IDX=2, DRAG_IDX=8;
 
-  const matchData = [
-    { label:"Class I (Low Risk)",       def:"Minimal risk to the patient",                              ex:"Tongue depressors or bandages" },
-    { label:"Class II (Moderate Risk)", def:"Devices with moderate risk that require special controls", ex:"Infusion pumps, BP monitors"   },
-    { label:"Class III (High Risk)",    def:"These devices usually sustain life or are implanted",      ex:"Heart valves or pacemakers"    },
+  const matchData=[
+    {label:"Class I (Low Risk)",       def:"Minimal risk to the patient",                              ex:"Tongue depressors or bandages"},
+    {label:"Class II (Moderate Risk)", def:"Devices with moderate risk that require special controls", ex:"Infusion pumps, BP monitors"},
+    {label:"Class III (High Risk)",    def:"These devices usually sustain life or are implanted",      ex:"Heart valves or pacemakers"},
   ];
 
-  const correctChain = ["Patient","Sensors / Transducers","Signal Conditioning","Processing","Display / Recording"];
+  const correctChain=["Patient","Sensors / Transducers","Signal Conditioning","Processing","Display / Recording"];
 
-  const questions = [
-    { type:"MCQ", q:"Which of the following BEST describes the primary purpose of biomedical equipment?",
-      options:["Manufacturing pharmaceutical drugs","Diagnosis, monitoring, treatment & rehabilitation of patients","Managing hospital administrative records","Conducting laboratory chemical experiments"], answer:1 },
-    { type:"True/False", q:"True or False: An ECG machine is classified as a Therapeutic device.",
-      options:["True","False"], answer:1 },
-    { type:"Matching", q:"Match each FDA Risk Class to its correct definition and example. Use ▲ ▼ to reorder the middle and right columns until every row lines up correctly.",
-      options:null, answer:null },
-    { type:"True/False", q:"True or False: A catheter is considered a Non-Invasive device.",
-      options:["True","False"], answer:1 },
-    { type:"MCQ", q:"In the instrumentation chain, what is the role of the Signal Conditioning stage?",
-      options:["Convert biological signals to electrical signals","Display the final result on a screen","Amplify and filter the electrical signal","Store data in a database"], answer:2 },
-    { type:"MCQ", q:"Which MDR (UK/EU) classification covers devices with medium-to-high risk, such as ventilators and infusion pumps?",
-      options:["Class I","Class IIa","Class IIb","Class III"], answer:2 },
-    { type:"True/False", q:"True or False: A pacemaker is classified as both Therapeutic (by function) and Invasive (by invasiveness).",
-      options:["True","False"], answer:0 },
-    { type:"MCQ", q:"Which energy source classification applies to an X-ray machine?",
-      options:["Thermal","Mechanical","Electrical","Radiation"], answer:3 },
-    { type:"Ordering", q:"Drag and drop the blocks into the correct order of the Biomedical Instrumentation Chain ⬇️",
-      options:null, answer:null },
-    { type:"True/False", q:"True or False: Under FDA classification, an infusion pump falls under Class II (Moderate Risk).",
-      options:["True","False"], answer:0 }
+  const questions=[
+    {type:"MCQ",       q:"Which of the following BEST describes the primary purpose of biomedical equipment?",
+     options:["Manufacturing pharmaceutical drugs","Diagnosis, monitoring, treatment & rehabilitation of patients","Managing hospital administrative records","Conducting laboratory chemical experiments"],answer:1},
+    {type:"True/False",q:"True or False: An ECG machine is classified as a Therapeutic device.",options:["True","False"],answer:1},
+    {type:"Matching",  q:"Match each FDA Risk Class to its correct definition and example. Use ▲ ▼ to reorder the middle and right columns until every row lines up correctly.",options:null,answer:null},
+    {type:"True/False",q:"True or False: A catheter is considered a Non-Invasive device.",options:["True","False"],answer:1},
+    {type:"MCQ",       q:"In the instrumentation chain, what is the role of the Signal Conditioning stage?",
+     options:["Convert biological signals to electrical signals","Display the final result on a screen","Amplify and filter the electrical signal","Store data in a database"],answer:2},
+    {type:"MCQ",       q:"Which MDR (UK/EU) classification covers devices with medium-to-high risk, such as ventilators and infusion pumps?",
+     options:["Class I","Class IIa","Class IIb","Class III"],answer:2},
+    {type:"True/False",q:"True or False: A pacemaker is classified as both Therapeutic (by function) and Invasive (by invasiveness).",options:["True","False"],answer:0},
+    {type:"MCQ",       q:"Which energy source classification applies to an X-ray machine?",options:["Thermal","Mechanical","Electrical","Radiation"],answer:3},
+    {type:"Ordering",  q:"Drag and drop the blocks into the correct order of the Biomedical Instrumentation Chain ⬇️",options:null,answer:null},
+    {type:"True/False",q:"True or False: Under FDA classification, an infusion pump falls under Class II (Moderate Risk).",options:["True","False"],answer:0},
   ];
 
-  let current=0, score=0, answered=false;
-  let defOrder=[], exOrder=[];
-  let chainDragSrc=null;
+  let current=0,score=0,answered=false,defOrder=[],exOrder=[],chainDragSrc=null;
 
-  /* ════════════════════════════════════
-     RENDER DISPATCHER
-  ════════════════════════════════════ */
-  function render() {
-    const q = questions[current];
-    document.getElementById('q-counter').textContent   = `Question ${current+1} of ${questions.length}`;
-    document.getElementById('q-type-badge').textContent = q.type;
-    document.getElementById('q-progress-bar').style.width = `${((current+1)/questions.length)*100}%`;
-    document.getElementById('q-text').textContent      = q.q;
-    document.getElementById('q-feedback').style.display = 'none';
-    document.getElementById('q-next-btn').style.display = 'none';
-    answered = false;
+  /* ── RENDER ── */
+  function render(){
+    const q=questions[current];
+    document.getElementById('q-counter').textContent=`Question ${current+1} of ${questions.length}`;
+    document.getElementById('q-progress-bar').style.width=`${((current+1)/questions.length)*100}%`;
 
-    const c = document.getElementById('q-options');
-    c.innerHTML=''; c.style.flexDirection='column'; c.style.gap='.75rem';
+    const badge=document.getElementById('q-type-badge');
+    const badgeClass={MCQ:'MCQ','True/False':'TF',Ordering:'Ordering',Matching:'Matching'}[q.type]||'MCQ';
+    badge.className=`q-badge ${badgeClass}`;
+    badge.textContent=q.type;
 
-    if      (current===MATCH_IDX) renderMatch(c);
-    else if (current===DRAG_IDX)  renderChain(c);
-    else                          renderMCQ(c, q);
+    document.getElementById('q-text').textContent=q.q;
+    const fb=document.getElementById('q-feedback');
+    fb.style.display='none'; fb.className='';
+    document.getElementById('q-next-btn').style.display='none';
+    answered=false;
+
+    const c=document.getElementById('q-options');
+    c.innerHTML=''; c.style.flexDirection='column'; c.style.gap='.65rem';
+
+    if(current===MATCH_IDX) renderMatch(c);
+    else if(current===DRAG_IDX) renderChain(c);
+    else renderMCQ(c,q);
   }
 
-  /* ════════════════════════════════════
-     MCQ / TRUE-FALSE
-  ════════════════════════════════════ */
-  function renderMCQ(c, q) {
+  /* ── MCQ ── */
+  function renderMCQ(c,q){
     q.options.forEach((opt,i)=>{
       const btn=document.createElement('button');
-      btn.textContent=opt;
-      btn.style.cssText=`background:rgba(255,255,255,0.05);border:1.5px solid rgba(99,179,237,0.2);
-        border-radius:10px;color:#cbd5e0;font-size:.95rem;font-weight:600;
-        font-family:'Nunito',sans-serif;padding:.75rem 1.1rem;text-align:left;
-        cursor:pointer;transition:all .18s;width:100%;`;
-      btn.onmouseover=()=>{ if(!answered) btn.style.background='rgba(99,179,237,0.1)'; };
-      btn.onmouseout =()=>{ if(!answered) btn.style.background='rgba(255,255,255,0.05)'; };
+      btn.className='q-option-btn'; btn.textContent=opt;
       btn.onclick=()=>selectAnswer(i);
       c.appendChild(btn);
     });
   }
 
   window.selectAnswer=function(chosen){
-    if(answered) return;
-    answered=true;
-    const q=questions[current], correct=q.answer;
-    document.querySelectorAll('#q-options button').forEach((btn,i)=>{
-      btn.style.cursor='default';
-      if(i===correct){ btn.style.background='rgba(72,187,120,0.2)'; btn.style.border='1.5px solid #48bb78'; btn.style.color='#9ae6b4'; }
-      if(i===chosen&&chosen!==correct){ btn.style.background='rgba(252,129,74,0.18)'; btn.style.border='1.5px solid #fc814a'; btn.style.color='#fbd38d'; }
+    if(answered)return; answered=true;
+    const q=questions[current],correct=q.answer;
+    document.querySelectorAll('.q-option-btn').forEach((btn,i)=>{
+      btn.onclick=null;
+      if(i===correct) btn.classList.add('q-opt-correct');
+      if(i===chosen&&chosen!==correct) btn.classList.add('q-opt-wrong');
     });
-    if(chosen===correct) score++;
-    showFeedback(chosen===correct, chosen===correct ? null : `The correct answer is: "${q.options[correct]}"`);
+    if(chosen===correct)score++;
+    showFeedback(chosen===correct,chosen===correct?null:`The correct answer is: "${q.options[correct]}"`);
     showNext();
   };
 
-  /* ════════════════════════════════════
-     Q3 — 3-COLUMN MATCHING
-     Layout: fixed grid per row so cols always align
-     [ClassCell] [→] [DefCell][▲▼] [→] [ExCell][▲▼]
-  ════════════════════════════════════ */
-  function renderMatch(c) {
-    defOrder = shuffle([0,1,2]);
-    exOrder  = shuffle([0,1,2]);
+  /* ── MATCHING Q3 ── */
+  const matchGRID='1fr 18px 1fr 34px 18px 1fr 34px';
 
-    const hint=document.createElement('p');
-    hint.style.cssText='color:#8ea4c8;font-size:.8rem;margin:0 0 .9rem;font-style:italic;';
-    hint.textContent='💡 Use ▲ ▼ to move definitions and examples so every row lines up correctly';
+  function renderMatch(c){
+    defOrder=shuffle([0,1,2]); exOrder=shuffle([0,1,2]);
+
+    const hint=document.createElement('p'); hint.className='q-hint';
+    hint.textContent='💡 Use ▲ ▼ to reorder definitions and examples so each row lines up correctly';
     c.appendChild(hint);
 
-    // ── Column headers ──
-    // We need headers to sit directly above the cells.
-    // Use the same grid template as the data rows.
-    const GRID = '1fr 18px 1fr 34px 18px 1fr 34px';
+    const hRow=document.createElement('div');
+    hRow.style.cssText=`display:grid;grid-template-columns:${matchGRID};gap:.4rem;margin-bottom:.3rem;`;
+    ['🏷️ Class','','📖 Definition','','','💡 Example',''].forEach(h=>{
+      const d=document.createElement('div'); d.className='match-col-hdr'; d.textContent=h; hRow.appendChild(d);
+    });
+    c.appendChild(hRow);
 
-    const headerRow=document.createElement('div');
-    headerRow.style.cssText=`display:grid;grid-template-columns:${GRID};gap:.4rem;margin-bottom:.3rem;`;
-
-    function hdr(text){ const d=document.createElement('div'); d.style.cssText='color:#63b3ed;font-size:.73rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;text-align:center;'; d.textContent=text; return d; }
-    function blank(){ const d=document.createElement('div'); return d; }
-
-    headerRow.appendChild(hdr('🏷️ Class'));
-    headerRow.appendChild(blank()); // arrow spacer
-    headerRow.appendChild(hdr('📖 Definition'));
-    headerRow.appendChild(blank()); // UD spacer
-    headerRow.appendChild(blank()); // arrow spacer
-    headerRow.appendChild(hdr('💡 Example'));
-    headerRow.appendChild(blank()); // UD spacer
-    c.appendChild(headerRow);
-
-    // ── Data rows (3) ──
     const rowsWrap=document.createElement('div');
-    rowsWrap.id='match-rows';
-    rowsWrap.style.cssText='display:flex;flex-direction:column;gap:.4rem;';
+    rowsWrap.id='match-rows'; rowsWrap.style.cssText='display:flex;flex-direction:column;gap:.4rem;';
     c.appendChild(rowsWrap);
-    buildAllMatchRows(rowsWrap, GRID);
+    buildMatchRows(rowsWrap);
 
     const checkBtn=document.createElement('button');
-    checkBtn.className='q-check-btn';
-    checkBtn.id='q-check-match-btn';
-    checkBtn.textContent='Check Matches ✓';
-    checkBtn.onclick=checkMatch;
+    checkBtn.className='q-check-btn'; checkBtn.id='q-check-match-btn';
+    checkBtn.textContent='Check Matches ✓'; checkBtn.onclick=checkMatch;
     c.appendChild(checkBtn);
   }
 
-  function buildAllMatchRows(wrap, GRID) {
+  function buildMatchRows(wrap){
     wrap.innerHTML='';
     for(let row=0;row<3;row++){
       const rowEl=document.createElement('div');
-      rowEl.style.cssText=`display:grid;grid-template-columns:${GRID};gap:.4rem;align-items:center;`;
+      rowEl.style.cssText=`display:grid;grid-template-columns:${matchGRID};gap:.4rem;align-items:center;`;
 
-      // [0] Class label (fixed)
-      const lbl=document.createElement('div');
-      lbl.className='match-cell fixed';
-      lbl.textContent=matchData[row].label;
-      rowEl.appendChild(lbl);
+      const lbl=document.createElement('div'); lbl.className='match-cell fixed';
+      lbl.textContent=matchData[row].label; rowEl.appendChild(lbl);
+      rowEl.appendChild(arrowEl());
 
-      // [1] Arrow
-      rowEl.appendChild(arrowDiv());
+      const dc=document.createElement('div'); dc.className='match-cell moveable';
+      dc.dataset.col='def'; dc.dataset.row=row;
+      dc.textContent=matchData[defOrder[row]].def; rowEl.appendChild(dc);
+      rowEl.appendChild(makeUD('def',row));
+      rowEl.appendChild(arrowEl());
 
-      // [2] Def cell
-      const defCell=document.createElement('div');
-      defCell.className='match-cell moveable';
-      defCell.dataset.col='def'; defCell.dataset.row=row;
-      defCell.textContent=matchData[defOrder[row]].def;
-      rowEl.appendChild(defCell);
-
-      // [3] Def UD buttons
-      rowEl.appendChild(makeUD('def', row));
-
-      // [4] Arrow
-      rowEl.appendChild(arrowDiv());
-
-      // [5] Ex cell
-      const exCell=document.createElement('div');
-      exCell.className='match-cell moveable';
-      exCell.dataset.col='ex'; exCell.dataset.row=row;
-      exCell.textContent=matchData[exOrder[row]].ex;
-      rowEl.appendChild(exCell);
-
-      // [6] Ex UD buttons
-      rowEl.appendChild(makeUD('ex', row));
+      const ec=document.createElement('div'); ec.className='match-cell moveable';
+      ec.dataset.col='ex'; ec.dataset.row=row;
+      ec.textContent=matchData[exOrder[row]].ex; rowEl.appendChild(ec);
+      rowEl.appendChild(makeUD('ex',row));
 
       wrap.appendChild(rowEl);
     }
   }
 
-  function arrowDiv(){
+  function arrowEl(){
     const d=document.createElement('div');
-    d.style.cssText='text-align:center;color:rgba(99,179,237,0.35);font-size:.85rem;';
-    d.textContent='→';
-    return d;
+    d.style.cssText='text-align:center;color:rgba(168,85,247,.4);font-size:.85rem;';
+    d.textContent='→'; return d;
   }
 
-  function makeUD(colType, row){
+  function makeUD(col,row){
     const wrap=document.createElement('div');
-    wrap.style.cssText='display:flex;flex-direction:column;align-items:center;gap:.2rem;';
-    if(row>0){
-      const u=document.createElement('button');
-      u.className='ud-btn'; u.textContent='▲';
-      u.onclick=()=>{ if(!answered) shiftRow(colType,row,-1); };
-      wrap.appendChild(u);
-    }
-    if(row<2){
-      const d=document.createElement('button');
-      d.className='ud-btn'; d.textContent='▼';
-      d.onclick=()=>{ if(!answered) shiftRow(colType,row,1); };
-      wrap.appendChild(d);
-    }
+    wrap.style.cssText='display:flex;flex-direction:column;align-items:center;gap:.18rem;';
+    if(row>0){const u=document.createElement('button');u.className='ud-btn';u.textContent='▲';u.onclick=()=>{if(!answered)shiftRow(col,row,-1);};wrap.appendChild(u);}
+    if(row<2){const d=document.createElement('button');d.className='ud-btn';d.textContent='▼';d.onclick=()=>{if(!answered)shiftRow(col,row,1);};wrap.appendChild(d);}
     return wrap;
   }
 
-  function shiftRow(colType, row, dir){
-    const order = colType==='def' ? defOrder : exOrder;
-    const other = row+dir;
-    if(other<0||other>2) return;
+  function shiftRow(col,row,dir){
+    const order=col==='def'?defOrder:exOrder,other=row+dir;
+    if(other<0||other>2)return;
     [order[row],order[other]]=[order[other],order[row]];
-    // Update only text in the cells (no full re-render → no layout shift)
     document.querySelectorAll('#match-rows .match-cell.moveable').forEach(cell=>{
-      const ct=cell.dataset.col, r=parseInt(cell.dataset.row);
-      const ord=ct==='def'?defOrder:exOrder;
+      const ct=cell.dataset.col,r=parseInt(cell.dataset.row),ord=ct==='def'?defOrder:exOrder;
       cell.textContent=ct==='def'?matchData[ord[r]].def:matchData[ord[r]].ex;
     });
   }
 
   function checkMatch(){
-    if(answered) return;
-    answered=true;
+    if(answered)return; answered=true;
     let allOk=true;
     document.querySelectorAll('#match-rows .match-cell.moveable').forEach(cell=>{
-      const ct=cell.dataset.col, r=parseInt(cell.dataset.row);
-      const ord=ct==='def'?defOrder:exOrder;
-      const ok=ord[r]===r;
-      cell.classList.add(ok?'correct-block':'wrong-block');
-      if(!ok) allOk=false;
+      const ct=cell.dataset.col,r=parseInt(cell.dataset.row),ord=ct==='def'?defOrder:exOrder;
+      const ok=ord[r]===r; cell.classList.add(ok?'correct-block':'wrong-block'); if(!ok)allOk=false;
     });
-    document.querySelectorAll('.ud-btn').forEach(b=>{ b.disabled=true; });
+    document.querySelectorAll('.ud-btn').forEach(b=>b.disabled=true);
     document.getElementById('q-check-match-btn').style.display='none';
-    if(allOk) score++;
+    if(allOk)score++;
     const fb=document.getElementById('q-feedback');
     fb.style.display='block';
     if(allOk){
-      fb.style.cssText='display:block;margin-top:1.2rem;padding:.9rem 1.2rem;border-radius:12px;font-size:.88rem;font-weight:600;line-height:1.55;background:rgba(72,187,120,0.12);border:1px solid rgba(72,187,120,0.3);color:#9ae6b4;';
-      fb.textContent='✅ Perfect! All rows matched correctly!';
-    } else {
-      fb.style.cssText='display:block;margin-top:1.2rem;padding:.9rem 1.2rem;border-radius:12px;font-size:.88rem;font-weight:600;line-height:1.55;background:rgba(252,129,74,0.1);border:1px solid rgba(252,129,74,0.3);color:#fbd38d;';
+      fb.className='fb-correct'; fb.textContent='✅ Perfect! All rows matched correctly!';
+    }else{
+      fb.className='fb-wrong';
       fb.innerHTML='❌ Not quite! Correct alignment:<br>Row 1: Class I → Minimal risk → Tongue depressors or bandages<br>Row 2: Class II → Moderate risk / special controls → Infusion pumps, BP monitors<br>Row 3: Class III → Life-sustaining or implanted → Heart valves or pacemakers';
     }
     showNext();
   }
 
-  /* ════════════════════════════════════
-     Q9 — CHAIN ORDERING (drag)
-  ════════════════════════════════════ */
+  /* ── CHAIN ORDERING Q9 ── */
   function renderChain(c){
+    const hint=document.createElement('p'); hint.className='q-hint';
+    hint.textContent='💡 Drag to reorder, then press Check Order'; c.appendChild(hint);
     shuffle(correctChain).forEach(label=>c.appendChild(makeChainBlock(label)));
-    const btn=document.createElement('button');
-    btn.className='q-check-btn'; btn.id='q-check-chain-btn';
-    btn.textContent='Check Order ✓'; btn.onclick=checkChain;
-
-    const hint=document.createElement('p');
-    hint.style.cssText='color:#8ea4c8;font-size:.8rem;margin:0 0 .6rem;font-style:italic;';
-    hint.textContent='💡 Drag to reorder, then press Check Order';
-    c.insertBefore(hint, c.firstChild);
-
-    c.appendChild(btn);
+    const btn=document.createElement('button'); btn.className='q-check-btn'; btn.id='q-check-chain-btn';
+    btn.textContent='Check Order ✓'; btn.onclick=checkChain; c.appendChild(btn);
   }
 
   function makeChainBlock(label){
-    const b=document.createElement('div');
-    b.className='q-drag-block'; b.draggable=true;
-    b.innerHTML=`<span style="color:#63b3ed;font-size:1.05rem;flex-shrink:0;">⠿</span><span>${label}</span>`;
-
-    b.addEventListener('dragstart',e=>{ chainDragSrc=chainIdx(b); setTimeout(()=>b.classList.add('dragging'),0); e.dataTransfer.effectAllowed='move'; });
-    b.addEventListener('dragend', ()=>b.classList.remove('dragging'));
-    b.addEventListener('dragover', e=>{ e.preventDefault(); b.classList.add('drag-over'); });
+    const b=document.createElement('div'); b.className='q-drag-block'; b.draggable=true;
+    b.innerHTML=`<span style="color:#a855f7;font-size:1rem;flex-shrink:0;">⠿</span><span>${label}</span>`;
+    b.addEventListener('dragstart',e=>{chainDragSrc=chainIdx(b);setTimeout(()=>b.classList.add('dragging'),0);e.dataTransfer.effectAllowed='move';});
+    b.addEventListener('dragend',()=>b.classList.remove('dragging'));
+    b.addEventListener('dragover',e=>{e.preventDefault();b.classList.add('drag-over');});
     b.addEventListener('dragleave',()=>b.classList.remove('drag-over'));
-    b.addEventListener('drop',e=>{ e.preventDefault(); b.classList.remove('drag-over'); const ti=chainIdx(b); if(chainDragSrc!==null&&chainDragSrc!==ti) chainSwap(chainDragSrc,ti); chainDragSrc=null; });
-
-    b.addEventListener('touchstart',e=>{ chainDragSrc=chainIdx(b); b.classList.add('dragging'); },{passive:true});
-    b.addEventListener('touchmove',e=>{ e.preventDefault(); const y=e.touches[0].clientY; chainBlocks().forEach(x=>{ const r=x.getBoundingClientRect(); x.classList.toggle('drag-over',x!==b&&y>=r.top&&y<=r.bottom); }); },{passive:false});
-    b.addEventListener('touchend',()=>{ b.classList.remove('dragging'); const ov=chainBlocks().find(x=>x.classList.contains('drag-over')); if(ov){ ov.classList.remove('drag-over'); const ti=chainIdx(ov); if(chainDragSrc!==null&&chainDragSrc!==ti) chainSwap(chainDragSrc,ti); } chainDragSrc=null; });
+    b.addEventListener('drop',e=>{e.preventDefault();b.classList.remove('drag-over');const ti=chainIdx(b);if(chainDragSrc!==null&&chainDragSrc!==ti)chainSwap(chainDragSrc,ti);chainDragSrc=null;});
+    b.addEventListener('touchstart',e=>{chainDragSrc=chainIdx(b);b.classList.add('dragging');},{passive:true});
+    b.addEventListener('touchmove',e=>{e.preventDefault();const y=e.touches[0].clientY;chainBlocks().forEach(x=>{const r=x.getBoundingClientRect();x.classList.toggle('drag-over',x!==b&&y>=r.top&&y<=r.bottom);});},{passive:false});
+    b.addEventListener('touchend',()=>{b.classList.remove('dragging');const ov=chainBlocks().find(x=>x.classList.contains('drag-over'));if(ov){ov.classList.remove('drag-over');const ti=chainIdx(ov);if(chainDragSrc!==null&&chainDragSrc!==ti)chainSwap(chainDragSrc,ti);}chainDragSrc=null;});
     return b;
   }
 
-  function chainBlocks(){ return [...document.querySelectorAll('#q-options .q-drag-block')]; }
-  function chainIdx(b){ return chainBlocks().indexOf(b); }
-  function chainSwap(from,to){ const c=document.getElementById('q-options'),all=chainBlocks(); if(from<to) c.insertBefore(all[from],all[to].nextSibling); else c.insertBefore(all[from],all[to]); }
+  function chainBlocks(){return[...document.querySelectorAll('#q-options .q-drag-block')];}
+  function chainIdx(b){return chainBlocks().indexOf(b);}
+  function chainSwap(from,to){const c=document.getElementById('q-options'),all=chainBlocks();if(from<to)c.insertBefore(all[from],all[to].nextSibling);else c.insertBefore(all[from],all[to]);}
 
   function checkChain(){
-    if(answered) return; answered=true;
-    const all=chainBlocks(), labels=all.map(b=>b.querySelector('span:last-child').textContent);
+    if(answered)return; answered=true;
+    const all=chainBlocks(),labels=all.map(b=>b.querySelector('span:last-child').textContent);
     const ok=labels.every((l,i)=>l===correctChain[i]);
-    all.forEach((b,i)=>{ b.draggable=false; b.classList.remove('drag-over','dragging'); b.classList.add(labels[i]===correctChain[i]?'correct-block':'wrong-block'); });
+    all.forEach((b,i)=>{b.draggable=false;b.classList.remove('drag-over','dragging');b.classList.add(labels[i]===correctChain[i]?'correct-block':'wrong-block');});
     document.getElementById('q-check-chain-btn').style.display='none';
-    if(ok) score++;
-    showFeedback(ok, ok?null:`Correct order: ${correctChain.join(' → ')}`);
+    if(ok)score++;
+    showFeedback(ok,ok?null:`Correct order: ${correctChain.join(' → ')}`);
     showNext();
   }
 
-  /* ════════════════════════════════════
-     SHARED FEEDBACK / NAV
-  ════════════════════════════════════ */
-  function showFeedback(ok, msg){
+  /* ── SHARED ── */
+  function showFeedback(ok,msg){
     const fb=document.getElementById('q-feedback');
     fb.style.display='block';
-    if(ok){
-      fb.style.background='rgba(72,187,120,0.12)'; fb.style.border='1px solid rgba(72,187,120,0.3)'; fb.style.color='#9ae6b4';
-      fb.textContent='✅ Correct!';
-    } else {
-      fb.style.background='rgba(252,129,74,0.1)'; fb.style.border='1px solid rgba(252,129,74,0.3)'; fb.style.color='#fbd38d';
-      fb.textContent=msg?`❌ ${msg}`:'❌ Incorrect.';
-    }
+    fb.className=ok?'fb-correct':'fb-wrong';
+    fb.textContent=ok?'✅ Correct!':(msg?`❌ ${msg}`:'❌ Incorrect.');
   }
 
   function showNext(){
@@ -786,11 +845,11 @@
     nb.textContent=current<questions.length-1?'Next →':'See Score';
   }
 
-  window.nextQuestion=function(){ current++; if(current>=questions.length) showScore(); else render(); };
+  window.nextQuestion=function(){current++;if(current>=questions.length)showScore();else render();};
 
   function showScore(){
     ['q-counter','q-type-badge','q-text','q-options','q-feedback','q-next-btn'].forEach(id=>document.getElementById(id).style.display='none');
-    document.getElementById('q-progress-bar').parentElement.style.display='none';
+    document.getElementById('q-progress-bar-track').style.display='none';
     const pct=Math.round((score/questions.length)*100);
     const msg=pct===100?'Perfect score! Outstanding! 🌟':pct>=80?'Great work! You know Lecture 1 well. 💪':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you've got this! 💡";
     document.getElementById('q-score-text').textContent=`${score} / ${questions.length}`;
@@ -803,7 +862,7 @@
     ['q-counter','q-type-badge','q-text','q-options'].forEach(id=>document.getElementById(id).style.display='');
     document.getElementById('q-feedback').style.display='none';
     document.getElementById('q-next-btn').style.display='none';
-    document.getElementById('q-progress-bar').parentElement.style.display='';
+    document.getElementById('q-progress-bar-track').style.display='';
     document.getElementById('q-score-screen').style.display='none';
     render();
   };
@@ -811,7 +870,7 @@
   render();
 })();
 </script>
-<!-- ===================================================== END QUIZ ===== -->
+<!-- ═══════════════════════════════ END QUIZ ══ -->
     </section>
 
     <!-- LECTURE 2 -->
