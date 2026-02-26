@@ -851,7 +851,7 @@
     ['q-counter','q-type-badge','q-text','q-options','q-feedback','q-next-btn'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('q-progress-bar-track').style.display='none';
     const pct=Math.round((score/questions.length)*100);
-    const msg=pct===100?'Perfect score! Outstanding! 🌟':pct>=80?'Great work! You know Lecture 1 well. 💪':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you've got this! 💡";
+    const msg=pct===100?'Perfect score! Definitely a nerd! 🌟':pct>=80?'Great work! You know Lecture 1 well. 💪 (Nerd)':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you need it! 💡";
     document.getElementById('q-score-text').textContent=`${score} / ${questions.length}`;
     document.getElementById('q-score-msg').textContent=`${pct}% — ${msg}`;
     document.getElementById('q-score-screen').style.display='block';
@@ -1627,7 +1627,7 @@
     ['q2-counter','q2-type-badge','q2-text','q2-options','q2-feedback','q2-next-btn'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('q2-progress-bar-track').style.display='none';
     const pct=Math.round((score/questions.length)*100);
-    const msg=pct===100?'Perfect score! Outstanding! 🌟':pct>=80?'Great work! You know Lecture 2 well. 💪':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you've got this! 💡";
+    const msg=pct===100?'Perfect score! Definitely a nerd! 🌟':pct>=80?'Great work! You know Lecture 1 well. 💪 (Nerd)':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you need it! 💡";
     document.getElementById('q2-score-text').textContent=`${score} / ${questions.length}`;
     document.getElementById('q2-score-msg').textContent=`${pct}% — ${msg}`;
     document.getElementById('q2-score-screen').style.display='block';
