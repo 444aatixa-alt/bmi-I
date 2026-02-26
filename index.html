@@ -2083,97 +2083,148 @@
         </div>
       </div>
 
-    <!-- 04 Key Example Sensors -->
-      <div class="concept-card" style="--cc:#fff3d6">
-        <div class="concept-num">04</div>
-        <div class="concept-body">
-          <h4 class="concept-title">Key Example Sensors</h4>
+          </div>
+    <!-- ══════════════════════════════════════════════
+         KEY EXAMPLE SENSORS
+         Paste this block AFTER the closing </div> of
+         the "Key Concepts to Apply" qa-group (line 2086)
+         and BEFORE </section> (line 2088)
+         ══════════════════════════════════════════════ -->
 
-          <!-- ── 01 ECG ── -->
-          <div class="concept-principle" style="margin-bottom:0.5rem">
-            <span class="cp-icon">♡</span>
+    <div class="qa-group">
+      <div class="qa-group-label">
+        <span class="qa-group-icon">🔬</span>
+        <span>Key Example Sensors &amp; Their Testing Equipment</span>
+      </div>
+
+      <!-- ── 01 Heart Sensor (ECG) ── -->
+      <div class="concept-card" style="--cc:#ffd6e7">
+        <div class="concept-num">01</div>
+        <div class="concept-body">
+
+          <h4 class="concept-title">Heart Sensor (ECG)</h4>
+
+          <div class="concept-principle">
+            <span class="cp-icon">⚡</span>
             <div>
-              <strong>01 Heart Sensor (ECG)</strong>
-              <span style="color:#888; font-weight:400; margin-left:6px;">→ electrical simulators</span>
+              <strong>Testing Equipment: Electrical Simulators</strong> — because real human heart rates naturally fluctuate, a simulator sends a perfectly controlled, mathematically precise electrical signal that <em>mimics</em> a human heart. This gives engineers a reliable, repeatable input to test against.
             </div>
           </div>
 
-          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:1.4rem;">
+          <div class="concept-row">
 
             <!-- 1.1 -->
             <div class="concept-half" style="--ch:#d6f0ff">
               <div class="concept-badge">⚙️ 1.1 — Analysers &amp; Simulators</div>
-              <p>The simulator sends a perfect, mathematically precise electrical signal that mimics a human heart — essential because real heart rates fluctuate.</p>
-              <p style="margin-top:6px"><strong>KPIs:</strong> Precision &amp; Response Time &nbsp;·&nbsp; <em>Use Case: Set to exactly 60 BPM → device must display 60.0 BPM every single time.</em></p>
+              <p>The <strong>primary classification</strong> of an electrical simulator. It acts as a controlled stand-in for the patient — the benchmark the device is measured against.</p>
+              <div style="margin-top:10px; font-size:12px; font-weight:700; color:#4a7fc1; text-transform:uppercase; letter-spacing:.5px;">KPIs Targeted</div>
+              <p style="margin-top:4px">Precision &amp; Response Time</p>
+              <div style="margin-top:10px; background:#fff3d6; border-left:3px solid #f0a83c; border-radius:8px; padding:9px 11px; font-size:12.5px; color:#444;">
+                <strong>📌 Use Case:</strong> Set the simulator to exactly 60 BPM — the device must display <em>60.0 BPM every single time</em> without deviation.
+              </div>
             </div>
 
             <!-- 1.2 -->
             <div class="concept-half" style="--ch:#d6ffe8">
               <div class="concept-badge">🔬 1.2 — Functional Testing</div>
-              <p>Ensures the entire system "works" from electrode leads to software display.</p>
-              <p style="margin-top:6px"><strong>KPIs:</strong> Sensitivity &amp; Accuracy &nbsp;·&nbsp; <em>Use Case: Trigger a simulated arrhythmia → verify the alarm fires.</em></p>
+              <p>Simulators verify the <strong>entire system "works"</strong> end-to-end — from the physical electrode leads all the way through to the software display.</p>
+              <div style="margin-top:10px; font-size:12px; font-weight:700; color:#27ae60; text-transform:uppercase; letter-spacing:.5px;">KPIs Targeted</div>
+              <p style="margin-top:4px">Sensitivity &amp; Accuracy</p>
+              <div style="margin-top:10px; background:#fff3d6; border-left:3px solid #f0a83c; border-radius:8px; padding:9px 11px; font-size:12.5px; color:#444;">
+                <strong>📌 Use Case:</strong> Trigger a simulated <em>arrhythmia</em> (irregular heartbeat) — verify the software detects the anomaly and fires an alarm.
+              </div>
             </div>
 
             <!-- 1.3 -->
             <div class="concept-half" style="--ch:#ffd6e7">
               <div class="concept-badge">⚡ 1.3 — Electrical Safety Testing</div>
-              <p>Simulators are paired with safety analyzers to perform electrical safety checks.</p>
-              <p style="margin-top:6px"><strong>KPIs:</strong> Repeatability &nbsp;·&nbsp; <em>Use Case: Check for "Leakage Current" — ensuring no unsafe electrical flow reaches the patient.</em></p>
+              <p>Simulators are paired with <strong>safety analyzers</strong> to perform electrical safety checks — ensuring no harmful electrical current can reach the patient.</p>
+              <div style="margin-top:10px; font-size:12px; font-weight:700; color:#c0506a; text-transform:uppercase; letter-spacing:.5px;">KPIs Targeted</div>
+              <p style="margin-top:4px">Repeatability</p>
+              <div style="margin-top:10px; background:#fff3d6; border-left:3px solid #f0a83c; border-radius:8px; padding:9px 11px; font-size:12.5px; color:#444;">
+                <strong>📌 Use Case:</strong> Check for <em>"Leakage Current"</em> — confirms that no unsafe electrical flow can pass through the device to the patient.
+              </div>
             </div>
 
           </div>
+        </div>
+      </div>
 
-          <!-- ── 02 SpO2 ── -->
-          <div class="concept-principle" style="margin-bottom:0.5rem">
-            <span class="cp-icon">💧</span>
+      <!-- ── 02 SpO₂ (Pulse Oximetry) ── -->
+      <div class="concept-card" style="--cc:#d6f0ff">
+        <div class="concept-num">02</div>
+        <div class="concept-body">
+
+          <h4 class="concept-title">SpO₂ — Pulse Oximetry</h4>
+
+          <div class="concept-principle">
+            <span class="cp-icon">💡</span>
             <div>
-              <strong>02 SpO₂ (Pulse Oximetry)</strong>
-              <span style="color:#888; font-weight:400; margin-left:6px;">uses light (red &amp; IR) to measure O₂ in blood → pulse oximetry testers</span>
+              <strong>How it works:</strong> Uses two wavelengths of light (red &amp; infrared) shone through the fingertip to measure oxygen saturation in the blood. <strong>Testing Equipment: Pulse Oximetry Testers</strong> — these mimic the human finger and simulate the light absorption patterns of blood at different oxygen levels.
             </div>
           </div>
 
-          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:1.4rem;">
+          <div class="concept-row">
 
             <!-- 2.1 -->
             <div class="concept-half" style="--ch:#d6f0ff">
               <div class="concept-badge">⚙️ 2.1 — Analysers &amp; Simulators</div>
-              <p>Pulse oximetry testers mimic the human finger and the light absorption patterns of blood at different oxygen levels to verify the sensor reacts correctly.</p>
-              <p style="margin-top:6px"><strong>KPIs:</strong> Precision, Accuracy &amp; Response Time</p>
+              <p>The tester acts as a <strong>simulated finger</strong> — it produces precise, known light absorption patterns corresponding to specific SpO₂ percentages to check if the sensor reacts correctly.</p>
+              <div style="margin-top:10px; font-size:12px; font-weight:700; color:#4a7fc1; text-transform:uppercase; letter-spacing:.5px;">KPIs Targeted</div>
+              <p style="margin-top:4px">Precision, Accuracy &amp; Response Time</p>
             </div>
 
             <!-- 2.2 -->
             <div class="concept-half" style="--ch:#d6ffe8">
               <div class="concept-badge">🔬 2.2 — Functional Testing</div>
-              <p>Verifies that the device is "functioning" as intended under simulated clinical conditions.</p>
+              <p>Using the simulated finger at <strong>different set oxygen levels</strong> verifies the device is functioning as intended under realistic clinical conditions — not just in theory.</p>
+              <div style="margin-top:10px; background:#fff3d6; border-left:3px solid #f0a83c; border-radius:8px; padding:9px 11px; font-size:12.5px; color:#444;">
+                <strong>📌 Key Point:</strong> If the tester is set to 95% SpO₂, the device must reliably read <em>95%</em> — not 93%, not 97%.
+              </div>
             </div>
 
           </div>
+        </div>
+      </div>
 
-          <!-- ── 03 CGM ── -->
-          <div class="concept-principle" style="margin-bottom:0.5rem">
+      <!-- ── 03 Continuous Glucose Monitor (CGM) ── -->
+      <div class="concept-card" style="--cc:#d6ffe8">
+        <div class="concept-num">03</div>
+        <div class="concept-body">
+
+          <h4 class="concept-title">Continuous Glucose Monitor (CGM)</h4>
+
+          <div class="concept-principle">
             <span class="cp-icon">🩸</span>
             <div>
-              <strong>03 Continuous Glucose Monitors (CGM)</strong>
-              <span style="color:#888; font-weight:400; margin-left:6px;">→ blood glucose strips</span>
+              <strong>Testing Equipment: Blood Glucose Strips</strong> — these are used in two distinct ways to validate the CGM sensor. Unlike ECG or SpO₂ testers, strips act as a <em>reference comparison tool</em> rather than purely a simulator.
             </div>
           </div>
 
-          <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="concept-row">
 
             <!-- 3.1 -->
-            <div class="concept-half" style="--ch:#ead6ff">
+            <div class="concept-half" style="--ch:#d6ffe8">
               <div class="concept-badge">📐 3.1 — Comparison with Reference Standards</div>
-              <p>To test accuracy, the strip's reading is compared against a "gold standard" laboratory blood test (the reference).</p>
-              <p style="margin-top:6px"><strong>KPIs:</strong> Accuracy (closeness to the true biological value) &amp; Precision (two strips from the same drop give the same result).</p>
+              <p>The strip's reading is compared against a <strong>"gold standard" laboratory blood test</strong> — the most trusted known value. This is the primary method to validate the CGM's output.</p>
+              <div style="margin-top:10px; font-size:12px; font-weight:700; color:#27ae60; text-transform:uppercase; letter-spacing:.5px;">KPIs Targeted</div>
+              <p style="margin-top:4px"><strong>Accuracy</strong> — is the output close to the true biological value?<br/><strong>Precision</strong> — do two strips from the same blood drop give the same result?</p>
             </div>
 
             <!-- 3.2 -->
             <div class="concept-half" style="--ch:#fff3d6">
               <div class="concept-badge">🔬 3.2 — Functional Testing</div>
-              <p>Using a strip with a <em>control solution</em> (a liquid with a known glucose level) ensures the sensor and strip are communicating properly.</p>
+              <p>Using a strip with a <strong>"control solution"</strong> — a liquid with a <em>precisely known</em> glucose concentration — confirms the sensor and strip are communicating and calculating correctly.</p>
+              <div style="margin-top:10px; background:#fff3d6; border-left:3px solid #f0a83c; border-radius:8px; padding:9px 11px; font-size:12.5px; color:#444;">
+                <strong>📌 Key Point:</strong> This is done before clinical use to rule out a faulty strip or miscalibrated sensor before it gives a patient a wrong reading.
+              </div>
             </div>
 
           </div>
+        </div>
+      </div>
+
+    </div><!-- end Key Example Sensors qa-group -->
 
         </div>
       </div>
