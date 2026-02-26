@@ -2083,6 +2083,100 @@
         </div>
       </div>
 
+    <!-- 04 Key Example Sensors -->
+      <div class="concept-card" style="--cc:#fff3d6">
+        <div class="concept-num">04</div>
+        <div class="concept-body">
+          <h4 class="concept-title">Key Example Sensors</h4>
+
+          <!-- ── 01 ECG ── -->
+          <div class="concept-principle" style="margin-bottom:0.5rem">
+            <span class="cp-icon">❤️</span>
+            <div>
+              <strong>01 Heart Sensor (ECG)</strong>
+              <span style="color:#888; font-weight:400; margin-left:6px;">→ electrical simulators</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:1.4rem;">
+
+            <!-- 1.1 -->
+            <div class="concept-half" style="--ch:#d6f0ff">
+              <div class="concept-badge">⚙️ 1.1 — Analysers &amp; Simulators</div>
+              <p>The simulator sends a perfect, mathematically precise electrical signal that mimics a human heart — essential because real heart rates fluctuate.</p>
+              <p style="margin-top:6px"><strong>KPIs:</strong> Precision &amp; Response Time &nbsp;·&nbsp; <em>Use Case: Set to exactly 60 BPM → device must display 60.0 BPM every single time.</em></p>
+            </div>
+
+            <!-- 1.2 -->
+            <div class="concept-half" style="--ch:#d6ffe8">
+              <div class="concept-badge">🔬 1.2 — Functional Testing</div>
+              <p>Ensures the entire system "works" from electrode leads to software display.</p>
+              <p style="margin-top:6px"><strong>KPIs:</strong> Sensitivity &amp; Accuracy &nbsp;·&nbsp; <em>Use Case: Trigger a simulated arrhythmia → verify the alarm fires.</em></p>
+            </div>
+
+            <!-- 1.3 -->
+            <div class="concept-half" style="--ch:#ffd6e7">
+              <div class="concept-badge">⚡ 1.3 — Electrical Safety Testing</div>
+              <p>Simulators are paired with safety analyzers to perform electrical safety checks.</p>
+              <p style="margin-top:6px"><strong>KPIs:</strong> Repeatability &nbsp;·&nbsp; <em>Use Case: Check for "Leakage Current" — ensuring no unsafe electrical flow reaches the patient.</em></p>
+            </div>
+
+          </div>
+
+          <!-- ── 02 SpO2 ── -->
+          <div class="concept-principle" style="margin-bottom:0.5rem">
+            <span class="cp-icon">💧</span>
+            <div>
+              <strong>02 SpO₂ (Pulse Oximetry)</strong>
+              <span style="color:#888; font-weight:400; margin-left:6px;">uses light (red &amp; IR) to measure O₂ in blood → pulse oximetry testers</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:1.4rem;">
+
+            <!-- 2.1 -->
+            <div class="concept-half" style="--ch:#d6f0ff">
+              <div class="concept-badge">⚙️ 2.1 — Analysers &amp; Simulators</div>
+              <p>Pulse oximetry testers mimic the human finger and the light absorption patterns of blood at different oxygen levels to verify the sensor reacts correctly.</p>
+              <p style="margin-top:6px"><strong>KPIs:</strong> Precision, Accuracy &amp; Response Time</p>
+            </div>
+
+            <!-- 2.2 -->
+            <div class="concept-half" style="--ch:#d6ffe8">
+              <div class="concept-badge">🔬 2.2 — Functional Testing</div>
+              <p>Verifies that the device is "functioning" as intended under simulated clinical conditions.</p>
+            </div>
+
+          </div>
+
+          <!-- ── 03 CGM ── -->
+          <div class="concept-principle" style="margin-bottom:0.5rem">
+            <span class="cp-icon">🩸</span>
+            <div>
+              <strong>03 Continuous Glucose Monitors (CGM)</strong>
+              <span style="color:#888; font-weight:400; margin-left:6px;">→ blood glucose strips</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:10px;">
+
+            <!-- 3.1 -->
+            <div class="concept-half" style="--ch:#ead6ff">
+              <div class="concept-badge">📐 3.1 — Comparison with Reference Standards</div>
+              <p>To test accuracy, the strip's reading is compared against a "gold standard" laboratory blood test (the reference).</p>
+              <p style="margin-top:6px"><strong>KPIs:</strong> Accuracy (closeness to the true biological value) &amp; Precision (two strips from the same drop give the same result).</p>
+            </div>
+
+            <!-- 3.2 -->
+            <div class="concept-half" style="--ch:#fff3d6">
+              <div class="concept-badge">🔬 3.2 — Functional Testing</div>
+              <p>Using a strip with a <em>control solution</em> (a liquid with a known glucose level) ensures the sensor and strip are communicating properly.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
     </div>
 
   </section>
