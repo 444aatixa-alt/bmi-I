@@ -36,3 +36,26 @@ window.addEventListener('scroll', () => {
     pill.style.color = pill.getAttribute('href') === `#${current}` ? '#fff' : '';
   });
 });
+
+// ── Q&A Accordion ──
+document.querySelectorAll('.qa-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.qa-item');
+    const answer = item.querySelector('.qa-a');
+    const isOpen = btn.classList.contains('open');
+
+    // Close all others
+    document.querySelectorAll('.qa-q.open').forEach(b => {
+      b.classList.remove('open');
+      b.closest('.qa-item').querySelector('.qa-a').classList.remove('open');
+    });
+
+    // Toggle this one
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+      // Smooth scroll into view
+      setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+    }
+  });
+});
