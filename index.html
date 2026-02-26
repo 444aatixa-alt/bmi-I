@@ -1339,7 +1339,7 @@
 
   function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-  const MATCH_IDX=3, DRAG_IDX=8;
+  const MATCH_IDX=3;
 
   /* ── Matching data: KPI → definition → example test method ── */
   const matchData=[
@@ -1352,66 +1352,87 @@
   const correctChain=["Identify the KPI to test","Select the appropriate test method","Apply the test (functional / electrical / simulator)","Compare results to reference standard","Document findings & flag deviations"];
 
   const questions=[
-    // Q1 MCQ
+    // Q1
     {type:"MCQ",
      q:"What is the PRIMARY goal of Quality Assurance (QA) in biomedical equipment management?",
      options:["Detecting defects in finished equipment","Preventing defects through planned, systematic processes","Repairing equipment after a malfunction","Labelling equipment with risk classifications"],
-     answer:1},
+     answer:1,
+     correctFB:"✅ Correct! QA is proactive — it sets up systems and processes to stop defects from happening in the first place.",
+     wrongFB:"❌ That describes QC, not QA. QA is proactive and process-oriented (prevention), while QC is the reactive step that detects defects after the fact."},
 
-    // Q2 True/False
-    {type:"True/False",
-     q:"True or False: Quality Control (QC) is a proactive, process-oriented approach that prevents defects before they occur.",
-     options:["True","False"],
-     answer:1},
+    // Q2 — new MCQ replacing repetitive T/F
+    {type:"MCQ",
+     q:"A pulse oximeter consistently reads 2% lower than the patient's true oxygen saturation across all measurements. Which KPI does this describe a failure of?",
+     options:["Repeatability","Sensitivity","Accuracy","Response Time"],
+     answer:2,
+     correctFB:"✅ Correct! Accuracy is about closeness to the true value. A consistent offset from the real reading is a classic accuracy failure.",
+     wrongFB:"❌ The key clue is 'consistently lower than the true value' — that's an Accuracy problem. Repeatability would mean inconsistent results; Sensitivity would mean the device misses small changes entirely."},
 
-    // Q3 MCQ
+    // Q3
     {type:"MCQ",
      q:"Which of the following BEST describes 'Precision' as a KPI for medical devices?",
      options:["The device measures exactly the true biological value","The device produces consistent results across repeated measurements","The device responds quickly to a patient input","The device detects the smallest possible signal change"],
-     answer:1},
+     answer:1,
+     correctFB:"✅ Correct! Precision and Repeatability are both about consistency across readings — not about hitting the true value.",
+     wrongFB:"❌ 'Measures the true value' = Accuracy. 'Responds quickly' = Response Time. 'Detects small changes' = Sensitivity. Precision means the same result comes out every time you measure."},
 
     // Q4 Matching
     {type:"Matching",
      q:"Match each KPI to its correct definition and example test method. Use ▲ ▼ to reorder the middle and right columns until every row lines up correctly.",
-     options:null, answer:null},
+     options:null, answer:null,
+     correctFB:"✅ Perfect! All rows matched correctly!",
+     wrongFB:"❌ Not quite! Correct: Accuracy → closeness to true value → calibrate against gold-standard | Sensitivity → detect small changes → analysers & simulators | Repeatability → same result under identical conditions → repeated functional testing"},
 
-    // Q5 True/False
+    // Q5
     {type:"True/False",
      q:"True or False: Electrical defects in medical equipment — such as line noise from the power supply — can lead to inaccurate measurements and incorrect diagnoses.",
      options:["True","False"],
-     answer:0},
+     answer:0,
+     correctFB:"✅ Correct! Line noise is an electrical defect that corrupts signal quality, directly skewing readings and potentially misleading clinical decisions.",
+     wrongFB:"❌ This is True. Power supply noise distorts the signals a device captures, so the output readings can no longer be trusted for accurate diagnosis."},
 
-    // Q6 MCQ
+    // Q6
     {type:"MCQ",
      q:"A biomedical engineer wants to verify that a new ECG machine gives readings as close as possible to a known gold-standard device. Which test method should they use?",
      options:["Electrical safety testing","Comparison with reference standards","Use of analysers & simulators","Functional testing alone"],
-     answer:1},
+     answer:1,
+     correctFB:"✅ Correct! Comparing against a gold-standard reference is exactly how you verify Accuracy — it shows how close your device is to the true value.",
+     wrongFB:"❌ Electrical safety testing checks leakage and insulation. Simulators test signal response. Functional testing checks general operation. Only Comparison with reference standards directly confirms Accuracy."},
 
-    // Q7 MCQ
+    // Q7
     {type:"MCQ",
      q:"Which type of defect describes a medical device that crashes or produces wrong readings due to a firmware bug?",
      options:["Mechanical defect","Environmental damage","Software defect","Electrical defect"],
-     answer:2},
+     answer:2,
+     correctFB:"✅ Correct! Firmware bugs and system crashes are Software defects — distinct from mechanical or electrical failures.",
+     wrongFB:"❌ Firmware is software, so this is a Software defect. Mechanical = physical parts failing; Electrical = power/wiring issues; Environmental = damage from dust, corrosion, etc."},
 
-    // Q8 True/False
+    // Q8
     {type:"True/False",
      q:"True or False: Response Time is a critical KPI for devices like patient alarms and real-time monitors because a slow response can delay life-saving intervention.",
      options:["True","False"],
-     answer:0},
+     answer:0,
+     correctFB:"✅ Correct! In real-time monitoring, every second matters — Response Time directly affects how quickly staff can act on a deteriorating patient.",
+     wrongFB:"❌ This is True. Response Time measures how fast a device reacts to an input. For alarms and monitors, even a few seconds of delay can be the difference between early intervention and a critical event."},
 
-    // Q9 Ordering (drag)
-    {type:"Ordering",
-     q:"Drag and drop the steps into the correct order for testing a KPI on a biomedical device ⬇️",
-     options:null, answer:null},
-
-    // Q10 MCQ — scenario
+    // Q9 — new MCQ replacing drag ordering
     {type:"MCQ",
-     q:"🏥 Scenario: A ventilator in the ICU begins delivering inconsistent tidal volumes — sometimes too high, sometimes too low — even though the settings haven't changed. A biomedical engineer is called in. Which KPI has failed, and which test method should they use to investigate?",
+     q:"Which of the following test methods would you use to check the leakage current and grounding of a newly serviced defibrillator?",
+     options:["Functional testing","Comparison with reference standards","Electrical safety testing","Use of analysers & simulators"],
+     answer:2,
+     correctFB:"✅ Correct! Electrical safety testing is specifically designed to check leakage current, insulation resistance, and grounding on powered devices.",
+     wrongFB:"❌ Functional testing checks if the device does its job; reference comparison verifies accuracy; simulators test signal response. Electrical safety testing is the dedicated method for leakage current and grounding checks."},
+
+    // Q10 — scenario
+    {type:"MCQ",
+     q:"🏥 Scenario: A ventilator in the ICU begins delivering inconsistent tidal volumes — sometimes too high, sometimes too low — even though the settings haven't changed. Which KPI has failed, and which test method should be used to investigate?",
      options:["Accuracy — compare against a reference standard","Repeatability — run functional testing under identical conditions","Response Time — use analysers & simulators","Sensitivity — perform electrical safety testing"],
-     answer:1},
+     answer:1,
+     correctFB:"✅ Correct! Inconsistent output under unchanged conditions is a Repeatability failure. Functional testing under identical conditions is how you reproduce and confirm the fault.",
+     wrongFB:"❌ The device isn't drifting from the true value (Accuracy) or responding slowly (Response Time) — it's giving different outputs each time under the same settings, which is a Repeatability failure. The right investigation tool is functional testing."},
   ];
 
-  let current=0, score=0, answered=false, defOrder=[], exOrder=[], chainDragSrc=null;
+  let current=0, score=0, answered=false, defOrder=[], exOrder=[];
 
   /* ── RENDER ── */
   function render(){
@@ -1434,7 +1455,6 @@
     c.innerHTML=''; c.style.flexDirection='column'; c.style.gap='.65rem';
 
     if(current===MATCH_IDX) renderMatch(c);
-    else if(current===DRAG_IDX) renderChain(c);
     else renderMCQ(c,q);
   }
 
@@ -1443,7 +1463,7 @@
     q.options.forEach((opt,i)=>{
       const btn=document.createElement('button');
       btn.className='q2-option-btn'; btn.textContent=opt;
-      btn.onclick=()=>selectAnswer(i);
+      btn.onclick=()=>selectAnswer2(i);
       c.appendChild(btn);
     });
   }
@@ -1457,19 +1477,9 @@
       if(i===chosen&&chosen!==correct) btn.classList.add('q2-opt-wrong');
     });
     if(chosen===correct)score++;
-    showFeedback(chosen===correct,chosen===correct?null:`The correct answer is: "${q.options[correct]}"`);
+    showFeedback(chosen===correct, chosen===correct ? q.correctFB : q.wrongFB);
     showNext();
   };
-
-  /* patch renderMCQ to use selectAnswer2 */
-  function renderMCQ(c,q){
-    q.options.forEach((opt,i)=>{
-      const btn=document.createElement('button');
-      btn.className='q2-option-btn'; btn.textContent=opt;
-      btn.onclick=()=>selectAnswer2(i);
-      c.appendChild(btn);
-    });
-  }
 
   /* ── MATCHING ── */
   const matchGRID='1fr 18px 1fr 34px 18px 1fr 34px';
@@ -1558,61 +1568,21 @@
     document.querySelectorAll('.ud2-btn').forEach(b=>b.disabled=true);
     document.getElementById('q2-check-match-btn').style.display='none';
     if(allOk)score++;
+    const q=questions[current];
     const fb=document.getElementById('q2-feedback');
     fb.style.display='block';
-    if(allOk){
-      fb.className='fb-correct'; fb.textContent='✅ Perfect! All rows matched correctly!';
-    }else{
-      fb.className='fb-wrong';
-      fb.innerHTML='❌ Not quite! Correct alignment:<br>Row 1: Accuracy → Closeness to true value → Calibrate against gold-standard<br>Row 2: Sensitivity → Detect small changes → Use analysers & simulators<br>Row 3: Repeatability → Same result under identical conditions → Functional testing repeated';
-    }
+    fb.className=allOk?'fb-correct':'fb-wrong';
+    fb.textContent=allOk ? q.correctFB : q.wrongFB;
     showNext();
   }
 
-  /* ── CHAIN ORDERING ── */
-  function renderChain(c){
-    const hint=document.createElement('p'); hint.className='q2-hint';
-    hint.textContent='💡 Drag to reorder, then press Check Order'; c.appendChild(hint);
-    shuffle(correctChain).forEach(label=>c.appendChild(makeChainBlock(label)));
-    const btn=document.createElement('button'); btn.className='q2-check-btn'; btn.id='q2-check-chain-btn';
-    btn.textContent='Check Order ✓'; btn.onclick=checkChain; c.appendChild(btn);
-  }
-
-  function makeChainBlock(label){
-    const b=document.createElement('div'); b.className='q2-drag-block'; b.draggable=true;
-    b.innerHTML=`<span style="color:#a855f7;font-size:1rem;flex-shrink:0;">⠿</span><span>${label}</span>`;
-    b.addEventListener('dragstart',e=>{chainDragSrc=chainIdx(b);setTimeout(()=>b.classList.add('dragging'),0);e.dataTransfer.effectAllowed='move';});
-    b.addEventListener('dragend',()=>b.classList.remove('dragging'));
-    b.addEventListener('dragover',e=>{e.preventDefault();b.classList.add('drag-over');});
-    b.addEventListener('dragleave',()=>b.classList.remove('drag-over'));
-    b.addEventListener('drop',e=>{e.preventDefault();b.classList.remove('drag-over');const ti=chainIdx(b);if(chainDragSrc!==null&&chainDragSrc!==ti)chainSwap(chainDragSrc,ti);chainDragSrc=null;});
-    b.addEventListener('touchstart',e=>{chainDragSrc=chainIdx(b);b.classList.add('dragging');},{passive:true});
-    b.addEventListener('touchmove',e=>{e.preventDefault();const y=e.touches[0].clientY;chainBlocks().forEach(x=>{const r=x.getBoundingClientRect();x.classList.toggle('drag-over',x!==b&&y>=r.top&&y<=r.bottom);});},{passive:false});
-    b.addEventListener('touchend',()=>{b.classList.remove('dragging');const ov=chainBlocks().find(x=>x.classList.contains('drag-over'));if(ov){ov.classList.remove('drag-over');const ti=chainIdx(ov);if(chainDragSrc!==null&&chainDragSrc!==ti)chainSwap(chainDragSrc,ti);}chainDragSrc=null;});
-    return b;
-  }
-
-  function chainBlocks(){return[...document.querySelectorAll('#q2-options .q2-drag-block')];}
-  function chainIdx(b){return chainBlocks().indexOf(b);}
-  function chainSwap(from,to){const c=document.getElementById('q2-options'),all=chainBlocks();if(from<to)c.insertBefore(all[from],all[to].nextSibling);else c.insertBefore(all[from],all[to]);}
-
-  function checkChain(){
-    if(answered)return; answered=true;
-    const all=chainBlocks(),labels=all.map(b=>b.querySelector('span:last-child').textContent);
-    const ok=labels.every((l,i)=>l===correctChain[i]);
-    all.forEach((b,i)=>{b.draggable=false;b.classList.remove('drag-over','dragging');b.classList.add(labels[i]===correctChain[i]?'correct2-block':'wrong2-block');});
-    document.getElementById('q2-check-chain-btn').style.display='none';
-    if(ok)score++;
-    showFeedback(ok,ok?null:`Correct order: ${correctChain.join(' → ')}`);
-    showNext();
-  }
 
   /* ── SHARED ── */
   function showFeedback(ok,msg){
     const fb=document.getElementById('q2-feedback');
     fb.style.display='block';
     fb.className=ok?'fb-correct':'fb-wrong';
-    fb.textContent=ok?'✅ Correct!':(msg?`❌ ${msg}`:'❌ Incorrect.');
+    fb.textContent=msg||(ok?'✅ Correct!':'❌ Incorrect.');
   }
 
   function showNext(){
@@ -1627,7 +1597,7 @@
     ['q2-counter','q2-type-badge','q2-text','q2-options','q2-feedback','q2-next-btn'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('q2-progress-bar-track').style.display='none';
     const pct=Math.round((score/questions.length)*100);
-    const msg=pct===100?'Perfect score! Definitely a nerd! 🌟':pct>=80?'Great work! You know Lecture 1 well. 💪 (Nerd)':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you need it! 💡";
+    const msg=pct===100?'Perfect score! Outstanding! 🌟':pct>=80?'Great work! You know Lecture 2 well. 💪':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you've got this! 💡";
     document.getElementById('q2-score-text').textContent=`${score} / ${questions.length}`;
     document.getElementById('q2-score-msg').textContent=`${pct}% — ${msg}`;
     document.getElementById('q2-score-screen').style.display='block';
@@ -1647,6 +1617,7 @@
 })();
 </script>
 <!-- ═══════════════════════════════ END QUIZ ══ -->
+
     </section>
   </main>
 
