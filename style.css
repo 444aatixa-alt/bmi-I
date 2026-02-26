@@ -1000,3 +1000,151 @@ footer {
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ── Key Concepts Cards ─────────── */
+.concept-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 20px;
+  border-left: 5px solid var(--cc);
+}
+
+.concept-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: var(--cc);
+  flex-shrink: 0;
+  line-height: 1;
+  filter: saturate(1.5) brightness(.85);
+}
+
+.concept-body { flex: 1; }
+
+.concept-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.concept-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.concept-half {
+  flex: 1;
+  min-width: 180px;
+  background: var(--ch);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.concept-badge {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.concept-half p { font-size: 13px; color: #444; margin: 0; }
+
+.concept-example {
+  background: var(--yellow);
+  border-left: 4px solid #f0a83c;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #444;
+  margin-top: 4px;
+}
+.concept-eg-label { font-weight: 700; margin-right: 6px; }
+
+.concept-principle {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+}
+.cp-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+.concept-kpi-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.concept-kpi-item {
+  flex: 1;
+  min-width: 160px;
+  background: var(--ck);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+}
+.ck-icon { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+.concept-kpi-item strong { display: block; margin-bottom: 6px; font-size: 14px; }
+.concept-kpi-item p { font-size: 12.5px; color: #555; margin: 0; }
+
+/* ── Drive Link (fixed) ─────────── */
+.notes-link-wrap {
+  max-width: 560px;
+  margin: 20px auto 52px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.notes-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(135deg, #ffd6e7 0%, #ead6ff 55%, #d6f0ff 100%);
+  border: 2px solid rgba(255,255,255,.85);
+  border-radius: 22px;
+  padding: 22px 32px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 8px 32px rgba(180,100,220,.18);
+  transition: transform .25s ease, box-shadow .25s ease;
+  width: 100%;
+  justify-content: center;
+}
+.notes-link:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 44px rgba(180,100,220,.28);
+}
+
+.notes-link-icon { font-size: 2.2rem; flex-shrink: 0; }
+
+.notes-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.notes-link-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.notes-link-sub {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media(max-width:600px){
+  .concept-card { flex-direction: column; gap: 8px; }
+  .concept-num  { font-size: 2rem; }
+}
