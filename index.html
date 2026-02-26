@@ -1288,8 +1288,39 @@
   padding: .2rem 0 .3rem;
 }
 
-/* clearfix */
-.q2-nav-row::after { content:''; display:table; clear:both; }
+/* ── Back button ── */
+#q2-back-btn {
+  background: #f3e8ff;
+  color: #7c3aed;
+  border: 1.5px solid rgba(168,85,247,.25);
+  border-radius: 12px;
+  padding: .65rem 1.4rem;
+  font-size: .92rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  cursor: pointer;
+  transition: background .2s, box-shadow .2s;
+  box-shadow: 0 2px 10px rgba(168,85,247,.08);
+}
+#q2-back-btn:hover { background: #dab4fe; box-shadow: 0 4px 16px rgba(168,85,247,.18); }
+
+/* reviewing banner */
+#q2-review-banner {
+  display: none;
+  background: #fff3d6;
+  border: 1.5px solid #fbbf24;
+  border-radius: 10px;
+  color: #92400e;
+  font-size: .78rem;
+  font-weight: 700;
+  padding: .45rem .9rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  letter-spacing: .2px;
+}
+
+
 </style>
 
 <!-- ── Quiz section ── -->
@@ -1310,6 +1341,9 @@
     <span id="q2-type-badge"></span>
   </div>
 
+  <!-- Review banner -->
+  <div id="q2-review-banner">👁️ Reviewing Q<span id="q2-review-num"></span> — answers locked until restart</div>
+
   <!-- Question text -->
   <div id="q2-text" style="font-size:1rem;font-weight:600;line-height:1.65;margin-bottom:1.4rem;min-height:48px;color:#2d2d3a;position:relative;z-index:1;"></div>
 
@@ -1320,8 +1354,9 @@
   <div id="q2-feedback" style="position:relative;z-index:1;"></div>
 
   <!-- Nav row -->
-  <div class="q2-nav-row" style="position:relative;z-index:1;">
-    <button id="q2-next-btn" onclick="nextQuestion2()">Next →</button>
+  <div class="q2-nav-row" style="position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;">
+    <button id="q2-back-btn" onclick="prevQuestion2()" style="display:none;">← Back</button>
+    <button id="q2-next-btn" onclick="nextQuestion2()" style="display:none;margin-top:0;float:none;">Next →</button>
   </div>
 
   <!-- Score screen -->
@@ -1348,8 +1383,6 @@
     {label:"🔁 Repeatability",def:"Producing the same result under identical conditions",   ex:"Run functional testing multiple times under same setup"},
   ];
 
-  /* ── Drag ordering: KPI testing pipeline ── */
-  const correctChain=["Identify the KPI to test","Select the appropriate test method","Apply the test (functional / electrical / simulator)","Compare results to reference standard","Document findings & flag deviations"];
 
   const questions=[
     // Q1
@@ -1433,62 +1466,109 @@
   ];
 
   let current=0, score=0, answered=false, defOrder=[], exOrder=[];
+  const history=[];  // history[i] = { chosen, wasCorrect, feedbackText, matchDefOrder?, matchExOrder? }
+  let highwater=0;   // furthest question the user has reached
 
   /* ── RENDER ── */
   function render(){
     const q=questions[current];
+    const saved=history[current];
+    const reviewing=saved!==undefined;
+
     document.getElementById('q2-counter').textContent=`Question ${current+1} of ${questions.length}`;
-    document.getElementById('q2-progress-bar').style.width=`${((current+1)/questions.length)*100}%`;
+    document.getElementById('q2-progress-bar').style.width=`${((highwater+1)/questions.length)*100}%`;
 
     const badge=document.getElementById('q2-type-badge');
-    const badgeClass={MCQ:'MCQ','True/False':'TF',Ordering:'Ordering',Matching:'Matching'}[q.type]||'MCQ';
+    const badgeClass={MCQ:'MCQ','True/False':'TF',Matching:'Matching'}[q.type]||'MCQ';
     badge.className=`q2-badge ${badgeClass}`;
     badge.textContent=q.type;
 
     document.getElementById('q2-text').textContent=q.q;
+
+    // review banner — only when revisiting a past question
+    const banner=document.getElementById('q2-review-banner');
+    if(reviewing && current<highwater){
+      banner.style.display='block';
+      document.getElementById('q2-review-num').textContent=current+1;
+    } else {
+      banner.style.display='none';
+    }
+
+    // feedback box
     const fb=document.getElementById('q2-feedback');
-    fb.style.display='none'; fb.className='';
-    document.getElementById('q2-next-btn').style.display='none';
-    answered=false;
+    if(reviewing){
+      fb.style.display='block';
+      fb.className=saved.wasCorrect?'fb-correct':'fb-wrong';
+      fb.textContent=saved.feedbackText;
+    } else {
+      fb.style.display='none'; fb.className='';
+    }
+
+    answered=reviewing;
 
     const c=document.getElementById('q2-options');
     c.innerHTML=''; c.style.flexDirection='column'; c.style.gap='.65rem';
 
-    if(current===MATCH_IDX) renderMatch(c);
-    else renderMCQ(c,q);
+    if(current===MATCH_IDX) renderMatch(c, saved);
+    else renderMCQ(c, q, saved);
+
+    // ← Back button: show whenever not on Q1
+    document.getElementById('q2-back-btn').style.display=current>0?'inline-block':'none';
+
+    // Next button: show only after answering
+    const nb=document.getElementById('q2-next-btn');
+    if(reviewing){
+      nb.style.display='inline-block';
+      nb.textContent=current<questions.length-1?'Next →':'See Score';
+    } else {
+      nb.style.display='none';
+    }
   }
 
-  /* ── MCQ ── */
-  function renderMCQ(c,q){
+  /* ── MCQ (includes True/False) ── */
+  function renderMCQ(c, q, saved){
     q.options.forEach((opt,i)=>{
       const btn=document.createElement('button');
-      btn.className='q2-option-btn'; btn.textContent=opt;
-      btn.onclick=()=>selectAnswer2(i);
+      btn.className='q2-option-btn';
+      btn.textContent=opt;
+      if(saved){
+        // read-only: show highlights, no click
+        if(i===q.answer) btn.classList.add('q2-opt-correct');
+        else if(i===saved.chosen && saved.chosen!==q.answer) btn.classList.add('q2-opt-wrong');
+      } else {
+        btn.onclick=()=>selectAnswer2(i);
+      }
       c.appendChild(btn);
     });
   }
 
   window.selectAnswer2=function(chosen){
     if(answered)return; answered=true;
-    const q=questions[current],correct=q.answer;
+    const q=questions[current], correct=q.answer;
+    const wasCorrect=chosen===correct;
     document.querySelectorAll('.q2-option-btn').forEach((btn,i)=>{
       btn.onclick=null;
       if(i===correct) btn.classList.add('q2-opt-correct');
-      if(i===chosen&&chosen!==correct) btn.classList.add('q2-opt-wrong');
+      if(i===chosen&&!wasCorrect) btn.classList.add('q2-opt-wrong');
     });
-    if(chosen===correct)score++;
-    showFeedback(chosen===correct, chosen===correct ? q.correctFB : q.wrongFB);
+    if(wasCorrect) score++;
+    const feedbackText=wasCorrect ? q.correctFB : q.wrongFB;
+    history[current]={chosen, wasCorrect, feedbackText};
+    if(current>=highwater) highwater=current;
+    showFeedback(wasCorrect, feedbackText);
     showNext();
+    document.getElementById('q2-back-btn').style.display=current>0?'inline-block':'none';
   };
 
   /* ── MATCHING ── */
   const matchGRID='1fr 18px 1fr 34px 18px 1fr 34px';
 
-  function renderMatch(c){
-    defOrder=shuffle([0,1,2]); exOrder=shuffle([0,1,2]);
+  function renderMatch(c, saved){
+    if(saved){ defOrder=[...saved.matchDefOrder]; exOrder=[...saved.matchExOrder]; }
+    else { defOrder=shuffle([0,1,2]); exOrder=shuffle([0,1,2]); }
 
     const hint=document.createElement('p'); hint.className='q2-hint';
-    hint.textContent='💡 Use ▲ ▼ to reorder definitions and examples so each row lines up correctly';
+    hint.textContent=saved ? '👁️ Reviewing your answer — read only' : '💡 Use ▲ ▼ to reorder definitions and examples so each row lines up correctly';
     c.appendChild(hint);
 
     const hRow=document.createElement('div');
@@ -1501,15 +1581,17 @@
     const rowsWrap=document.createElement('div');
     rowsWrap.id='match2-rows'; rowsWrap.style.cssText='display:flex;flex-direction:column;gap:.4rem;';
     c.appendChild(rowsWrap);
-    buildMatchRows(rowsWrap);
+    buildMatchRows(rowsWrap, saved);
 
-    const checkBtn=document.createElement('button');
-    checkBtn.className='q2-check-btn'; checkBtn.id='q2-check-match-btn';
-    checkBtn.textContent='Check Matches ✓'; checkBtn.onclick=checkMatch;
-    c.appendChild(checkBtn);
+    if(!saved){
+      const checkBtn=document.createElement('button');
+      checkBtn.className='q2-check-btn'; checkBtn.id='q2-check-match-btn';
+      checkBtn.textContent='Check Matches ✓'; checkBtn.onclick=checkMatch;
+      c.appendChild(checkBtn);
+    }
   }
 
-  function buildMatchRows(wrap){
+  function buildMatchRows(wrap, saved){
     wrap.innerHTML='';
     for(let row=0;row<3;row++){
       const rowEl=document.createElement('div');
@@ -1521,14 +1603,18 @@
 
       const dc=document.createElement('div'); dc.className='match2-cell moveable';
       dc.dataset.col='def'; dc.dataset.row=row;
-      dc.textContent=matchData[defOrder[row]].def; rowEl.appendChild(dc);
-      rowEl.appendChild(makeUD('def',row));
+      dc.textContent=matchData[defOrder[row]].def;
+      if(saved) dc.classList.add(defOrder[row]===row?'correct2-block':'wrong2-block');
+      rowEl.appendChild(dc);
+      rowEl.appendChild(saved ? document.createElement('div') : makeUD('def',row));
       rowEl.appendChild(arrowEl());
 
       const ec=document.createElement('div'); ec.className='match2-cell moveable';
       ec.dataset.col='ex'; ec.dataset.row=row;
-      ec.textContent=matchData[exOrder[row]].ex; rowEl.appendChild(ec);
-      rowEl.appendChild(makeUD('ex',row));
+      ec.textContent=matchData[exOrder[row]].ex;
+      if(saved) ec.classList.add(exOrder[row]===row?'correct2-block':'wrong2-block');
+      rowEl.appendChild(ec);
+      rowEl.appendChild(saved ? document.createElement('div') : makeUD('ex',row));
 
       wrap.appendChild(rowEl);
     }
@@ -1567,15 +1653,16 @@
     });
     document.querySelectorAll('.ud2-btn').forEach(b=>b.disabled=true);
     document.getElementById('q2-check-match-btn').style.display='none';
-    if(allOk)score++;
+    if(allOk) score++;
     const q=questions[current];
+    const feedbackText=allOk ? q.correctFB : q.wrongFB;
+    history[current]={chosen:null, wasCorrect:allOk, feedbackText, matchDefOrder:[...defOrder], matchExOrder:[...exOrder]};
+    if(current>=highwater) highwater=current;
     const fb=document.getElementById('q2-feedback');
-    fb.style.display='block';
-    fb.className=allOk?'fb-correct':'fb-wrong';
-    fb.textContent=allOk ? q.correctFB : q.wrongFB;
+    fb.style.display='block'; fb.className=allOk?'fb-correct':'fb-wrong'; fb.textContent=feedbackText;
     showNext();
+    document.getElementById('q2-back-btn').style.display=current>0?'inline-block':'none';
   }
-
 
   /* ── SHARED ── */
   function showFeedback(ok,msg){
@@ -1591,11 +1678,20 @@
     nb.textContent=current<questions.length-1?'Next →':'See Score';
   }
 
-  window.nextQuestion2=function(){current++;if(current>=questions.length)showScore();else render();};
+  window.nextQuestion2=function(){
+    current++;
+    if(current>=questions.length) showScore();
+    else render();
+  };
+
+  window.prevQuestion2=function(){
+    if(current>0){ current--; render(); }
+  };
 
   function showScore(){
-    ['q2-counter','q2-type-badge','q2-text','q2-options','q2-feedback','q2-next-btn'].forEach(id=>document.getElementById(id).style.display='none');
+    ['q2-counter','q2-type-badge','q2-text','q2-options','q2-feedback','q2-next-btn','q2-back-btn'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('q2-progress-bar-track').style.display='none';
+    document.getElementById('q2-review-banner').style.display='none';
     const pct=Math.round((score/questions.length)*100);
     const msg=pct===100?'Perfect score! Outstanding! 🌟':pct>=80?'Great work! You know Lecture 2 well. 💪':pct>=60?'Good effort! Review the missed topics. 📖':"Keep studying — you've got this! 💡";
     document.getElementById('q2-score-text').textContent=`${score} / ${questions.length}`;
@@ -1604,10 +1700,12 @@
   }
 
   window.restartQuiz2=function(){
-    current=0; score=0;
+    current=0; score=0; highwater=0; history.length=0;
     ['q2-counter','q2-type-badge','q2-text','q2-options'].forEach(id=>document.getElementById(id).style.display='');
     document.getElementById('q2-feedback').style.display='none';
     document.getElementById('q2-next-btn').style.display='none';
+    document.getElementById('q2-back-btn').style.display='none';
+    document.getElementById('q2-review-banner').style.display='none';
     document.getElementById('q2-progress-bar-track').style.display='';
     document.getElementById('q2-score-screen').style.display='none';
     render();
