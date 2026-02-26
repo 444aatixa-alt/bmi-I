@@ -1,635 +1,1061 @@
-/* ============================
-   BM 531 Study Site — Styles
-   Pastel + Soft Editorial Theme
-   ============================ */
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --pink:   #ffd6e7;
-  --blue:   #d6f0ff;
-  --green:  #d6ffe8;
-  --yellow: #fff3d6;
-  --purple: #ead6ff;
-  --text:   #2d2d3a;
-  --muted:  #6b6b80;
-  --bg:     #fdf8f5;
-  --white:  #ffffff;
-  --radius: 18px;
-  --shadow: 0 4px 24px rgba(0,0,0,.07);
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Sora', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.65;
-  font-size: 15px;
-}
-
-em { font-family: 'DM Serif Display', serif; font-style: italic; }
-
-/* ─── HERO ────────────────────────────────────── */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: linear-gradient(135deg, #fff0f6 0%, #f0f7ff 50%, #f3fff7 100%);
-}
-
-.hero-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.55;
-  animation: float 8s ease-in-out infinite;
-}
-.blob1 { width: 500px; height: 500px; background: #ffd6e7; top: -100px; left: -150px; animation-delay: 0s; }
-.blob2 { width: 400px; height: 400px; background: #d6f0ff; bottom: -80px; right: -100px; animation-delay: 2s; }
-.blob3 { width: 300px; height: 300px; background: #d6ffe8; top: 40%; left: 50%; animation-delay: 4s; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 2rem;
-  animation: fadeUp .8s ease both;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.course-tag {
-  display: inline-block;
-  background: var(--white);
-  border: 2px solid var(--pink);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 6px 18px;
-  border-radius: 30px;
-  margin-bottom: 1.5rem;
-}
-
-.hero h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  color: var(--text);
-}
-
-.hero-sub {
-  color: var(--muted);
-  font-size: 1.1rem;
-  font-weight: 300;
-  margin-bottom: 2.5rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-pills {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.pill {
-  background: var(--white);
-  border: 1.5px solid rgba(0,0,0,0.1);
-  color: var(--text);
-  padding: 10px 22px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all .2s ease;
-  box-shadow: var(--shadow);
-}
-.pill:hover {
-  background: var(--text);
-  color: #fff;
-  transform: translateY(-2px);
-  border-color: var(--text);
-}
-
-/* ─── SECTIONS ────────────────────────────────── */
-.section {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 24px;
-  animation: fadeUp .6s ease both;
-}
-
-.section-header {
-  margin-bottom: 48px;
-  text-align: center;
-}
-
-.section-label {
-  display: inline-block;
-  background: var(--pink);
-  color: var(--text);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 5px 16px;
-  border-radius: 20px;
-  margin-bottom: 12px;
-}
-
-.section-header h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  color: var(--text);
-}
-
-/* ─── CLO GRID ────────────────────────────────── */
-.clo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.clo-card {
-  background: var(--accent);
-  border-radius: var(--radius);
-  padding: 24px 20px;
-  transition: transform .2s ease, box-shadow .2s ease;
-  position: relative;
-  overflow: hidden;
-}
-.clo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-
-.clo-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2rem;
-  color: rgba(0,0,0,0.15);
-  position: absolute;
-  top: 12px;
-  right: 16px;
-}
-
-.clo-tag {
-  display: inline-block;
-  background: rgba(255,255,255,0.6);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  color: var(--muted);
-}
-
-.clo-card p { font-size: 13.5px; line-height: 1.6; }
-
-/* ─── INFO BANNER ─────────────────────────────── */
-.info-banner {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  background: var(--b);
-  border-left: 5px solid var(--bt);
-  border-radius: var(--radius);
-  padding: 28px 28px;
-  margin-bottom: 40px;
-}
-
-.info-icon { font-size: 2.5rem; flex-shrink: 0; }
-
-.info-banner h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem;
-  margin-bottom: 8px;
-}
-.info-banner p { font-size: 14.5px; color: #444; }
-
-/* ─── WHY GRID ────────────────────────────────── */
-.why-grid { margin-bottom: 40px; }
-
-.why-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem;
-  margin-bottom: 16px;
-  color: var(--muted);
-  text-align: center;
-}
-
-.why-cards {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.why-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--white);
-  border: 1.5px solid rgba(0,0,0,0.08);
-  border-radius: 40px;
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: var(--shadow);
-  transition: transform .2s;
-}
-.why-card:hover { transform: scale(1.03); }
-
-/* ─── CLASSIFY BLOCK ──────────────────────────── */
-.classify-block {
-  background: var(--white);
-  border-radius: 24px;
-  padding: 36px;
-  margin-bottom: 32px;
-  box-shadow: var(--shadow);
-}
-
-.classify-title {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
-}
-
-.classify-icon { font-size: 1.8rem; }
-
-.classify-title h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.5rem;
-}
-
-/* ─── FUNCTION GRID ───────────────────────────── */
-.function-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 18px;
-}
-
-.fn-card {
-  background: var(--c);
-  border-radius: 16px;
-  padding: 22px 20px;
-  transition: transform .2s;
-}
-.fn-card:hover { transform: translateY(-4px); }
-
-.fn-emoji { font-size: 2rem; margin-bottom: 10px; }
-.fn-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
-.fn-card p { font-size: 13px; color: #555; margin-bottom: 10px; }
-.fn-examples {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: rgba(0,0,0,0.5);
-  letter-spacing: .5px;
-  text-transform: uppercase;
-}
-
-/* ─── INVASIVE SPECTRUM ───────────────────────── */
-.invasive-spectrum { padding: 10px 0; }
-
-.inv-bar {
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
-.inv-item {
-  flex: 1;
-  min-width: 180px;
-  background: var(--bg);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-}
-
-.inv-dot {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  margin: 0 auto 12px;
-}
-
-.inv-low  { background: #d6ffe8; } .inv-low  .inv-dot { background: #52c77a; }
-.inv-mid  { background: #fff3d6; } .inv-mid  .inv-dot { background: #f0a83c; }
-.inv-high { background: #ffd6e7; } .inv-high .inv-dot { background: #e85d87; }
-
-.inv-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-.inv-item p  { font-size: 12.5px; color: #555; margin-bottom: 8px; }
-.inv-ex { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: rgba(0,0,0,0.45); }
-
-.inv-line { display: none; }
-
-/* ─── RISK ────────────────────────────────────── */
-.risk-wrapper {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.risk-col { flex: 1; min-width: 240px; }
-
-.risk-header {
-  background: var(--rc);
-  border-radius: 10px 10px 0 0;
-  padding: 10px 16px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
-  margin-bottom: 4px;
-}
-
-.risk-card {
-  background: var(--rc);
-  border-radius: 12px;
-  padding: 16px 18px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.risk-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  width: fit-content;
-  margin-bottom: 2px;
-}
-.risk-badge.low  { background: #52c77a; color: #fff; }
-.risk-badge.mid  { background: #f0a83c; color: #fff; }
-.risk-badge.mida { background: #5ba8d4; color: #fff; }
-.risk-badge.midb { background: #a06dd4; color: #fff; }
-.risk-badge.high { background: #e85d87; color: #fff; }
-
-.risk-label { font-weight: 700; font-size: 13px; }
-.risk-card p { font-size: 12.5px; color: #555; }
-.risk-ex { font-size: 11px; font-weight: 600; color: rgba(0,0,0,0.45); text-transform: uppercase; letter-spacing: .5px; }
-
-/* ─── ENERGY GRID ─────────────────────────────── */
-.energy-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 18px;
-}
-.en-card {
-  background: var(--ec);
-  border-radius: 16px;
-  padding: 24px 20px;
-  text-align: center;
-  transition: transform .2s;
-}
-.en-card:hover { transform: translateY(-4px); }
-.en-icon { font-size: 2.2rem; margin-bottom: 10px; }
-.en-card h4 { font-weight: 700; margin-bottom: 6px; }
-.en-card p { font-size: 13px; color: #555; margin-bottom: 6px; }
-.en-card small { font-size: 11.5px; color: rgba(0,0,0,0.45); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
-
-/* ─── APP GRID ────────────────────────────────── */
-.app-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 14px;
-}
-.app-card {
-  background: var(--bg);
-  border: 1.5px solid rgba(0,0,0,0.08);
-  border-radius: 16px;
-  padding: 18px 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  text-align: center;
-  font-size: 1.8rem;
-  transition: transform .2s, box-shadow .2s;
-}
-.app-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-.app-name { font-size: 13px; font-weight: 700; }
-.app-ex { font-size: 11px; color: var(--muted); }
-
-/* ─── PIPELINE ────────────────────────────────── */
-.principle-block { margin-top: 40px; }
-
-.pipeline {
-  display: flex;
-  align-items: stretch;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.pipe-step {
-  background: var(--ps);
-  border-radius: 16px;
-  padding: 22px 18px;
-  flex: 1;
-  min-width: 140px;
-  text-align: center;
-  position: relative;
-  transition: transform .2s;
-}
-.pipe-step:hover { transform: scale(1.04); }
-
-.pipe-num {
-  position: absolute;
-  top: 10px; left: 14px;
-  font-size: 11px;
-  font-weight: 700;
-  background: rgba(255,255,255,0.6);
-  border-radius: 10px;
-  padding: 2px 8px;
-  color: rgba(0,0,0,0.4);
-}
-.pipe-icon { font-size: 2rem; margin-bottom: 8px; }
-.pipe-label { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-.pipe-desc { font-size: 11.5px; color: #555; }
-
-.pipe-arrow {
-  display: flex;
-  align-items: center;
-  font-size: 1.4rem;
-  color: var(--muted);
-  padding: 0 2px;
-}
-
-/* ─── QA / QC COMPARE ─────────────────────────── */
-.compare-block {
-  display: flex;
-  gap: 20px;
-  align-items: stretch;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-
-.compare-card {
-  flex: 1;
-  min-width: 240px;
-  background: var(--cc);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  transition: transform .2s;
-}
-.compare-card:hover { transform: translateY(-4px); }
-
-.compare-icon { font-size: 2.5rem; margin-bottom: 14px; }
-.compare-card h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem;
-  margin-bottom: 12px;
-}
-.compare-def {
-  font-size: 14px;
-  color: #444;
-  margin-bottom: 18px;
-  line-height: 1.7;
-}
-.compare-tags {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.compare-tags span {
-  display: inline-block;
-  background: rgba(255,255,255,0.6);
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.compare-vs {
-  display: flex;
-  align-items: center;
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.8rem;
-  color: var(--muted);
-  padding: 8px;
-}
-
-/* ─── DEFECT LIST ─────────────────────────────── */
-.defect-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.defect-item {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: var(--dc);
-  border-radius: 14px;
-  padding: 16px 20px;
-  transition: transform .2s;
-}
-.defect-item:hover { transform: translateX(6px); }
-.defect-icon { font-size: 1.8rem; flex-shrink: 0; }
-.defect-item strong { font-size: 14.5px; display: block; margin-bottom: 2px; }
-.defect-item p { font-size: 13px; color: #555; }
-
-/* ─── KPI GRID ────────────────────────────────── */
-.kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 18px;
-}
-.kpi-card {
-  background: var(--kc);
-  border-radius: 16px;
-  padding: 24px 18px;
-  text-align: center;
-  transition: transform .2s;
-}
-.kpi-card:hover { transform: translateY(-4px); }
-.kpi-icon { font-size: 2rem; margin-bottom: 10px; }
-.kpi-card h4 { font-weight: 700; margin-bottom: 8px; }
-.kpi-card p { font-size: 13px; color: #444; }
-
-/* ─── METHOD STEPS ────────────────────────────── */
-.method-steps { display: flex; flex-direction: column; gap: 14px; }
-
-.method-step {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  background: var(--ms);
-  border-radius: 14px;
-  padding: 18px 22px;
-  transition: transform .2s;
-}
-.method-step:hover { transform: translateX(6px); }
-
-.ms-num {
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 14px;
-  color: var(--text);
-}
-.ms-content strong { font-size: 14.5px; display: block; margin-bottom: 3px; }
-.ms-content p { font-size: 13px; color: #555; }
-
-/* ─── FOOTER ──────────────────────────────────── */
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--muted);
-  font-size: 13px;
-  border-top: 1px solid rgba(0,0,0,.06);
-  margin-top: 40px;
-}
-
-/* ─── SCROLL ANIMATIONS ───────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .6s ease, transform .6s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─── RESPONSIVE ──────────────────────────────── */
-@media (max-width: 600px) {
-  .classify-block { padding: 22px 16px; }
-  .compare-block  { flex-direction: column; }
-  .compare-vs     { justify-content: center; }
-  .pipe-arrow     { display: none; }
-  .pipeline       { gap: 12px; }
-  .pipe-step      { min-width: 100%; }
-  .risk-wrapper   { flex-direction: column; }
-  .inv-bar        { flex-direction: column; }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BM 531 — Biomedical Instrumentation</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-blob blob1"></div>
+    <div class="hero-blob blob2"></div>
+    <div class="hero-blob blob3"></div>
+    <div class="hero-inner">
+      <span class="course-tag">BM 531</span>
+      <h1>Biomedical<br/><em>Instrumentation</em></h1>
+      <p class="hero-sub">Your visual study guide — from classification to quality control</p>
+      <div class="hero-pills">
+        <a href="#lecture1" class="pill">📋 Lecture 1</a>
+        <a href="#lecture2" class="pill">🔬 Lecture 2</a>
+        <a href="#clos" class="pill">🎯 CLOs</a>
+        <a href="#exam" class="pill">📝 Exam Prep</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- CLOs SECTION -->
+    <section id="clos" class="section">
+      <div class="section-header">
+        <span class="section-label">Course Overview</span>
+        <h2>Learning Objectives</h2>
+      </div>
+      <div class="clo-grid">
+        <div class="clo-card" style="--accent:#ffd6e7">
+          <div class="clo-num">CLO 1</div>
+          <div class="clo-tag">Cognitive · L2</div>
+          <p>Explain basic <strong>classification techniques</strong> & working principles of biomedical equipment</p>
+        </div>
+        <div class="clo-card" style="--accent:#d6f0ff">
+          <div class="clo-num">CLO 2</div>
+          <div class="clo-tag">Affective · L4</div>
+          <p>Conceptualize design of biomedical solutions using <strong>sensors, transducers & biopotentials</strong></p>
+        </div>
+        <div class="clo-card" style="--accent:#d6ffe8">
+          <div class="clo-num">CLO 3</div>
+          <div class="clo-tag">Psychomotor · P3</div>
+          <p>Construct <strong>operational prototypes</strong> using fundamental components & software tools</p>
+        </div>
+        <div class="clo-card" style="--accent:#fff3d6">
+          <div class="clo-num">CLO 4</div>
+          <div class="clo-tag">Cognitive · C5</div>
+          <p>Apply <strong>project management skills</strong> to develop engineering solutions for biomedical issues</p>
+        </div>
+        <div class="clo-card" style="--accent:#ead6ff">
+          <div class="clo-num">CLO 5</div>
+          <div class="clo-tag">Affective · A3</div>
+          <p>Justify sensor selection & <strong>critique alternatives</strong> with pros and cons</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LECTURE 1 -->
+    <section id="lecture1" class="section">
+      <div class="section-header">
+        <span class="section-label">Lecture 1</span>
+        <h2>Biomedical Equipment & Classification</h2>
+      </div>
+
+      <!-- What is BM Equipment -->
+      <div class="info-banner" style="--b:#ffd6e7;--bt:#ff8fab">
+        <div class="info-icon">🏥</div>
+        <div>
+          <h3>What is Biomedical Equipment?</h3>
+          <p>Devices used in healthcare for <strong>diagnosis, monitoring, treatment & rehabilitation</strong>. They apply engineering, physics, biology & medicine to support clinical decision-making.</p>
+        </div>
+      </div>
+
+      <!-- Why classify -->
+      <div class="why-grid">
+        <h3 class="why-title">Why Classify BM Equipment?</h3>
+        <div class="why-cards">
+          <div class="why-card">🔍<span>Understand function & application</span></div>
+          <div class="why-card">🛡️<span>Ensure patient safety</span></div>
+          <div class="why-card">⚙️<span>Simplify design & maintenance</span></div>
+          <div class="why-card">📚<span>Support clinical training</span></div>
+        </div>
+      </div>
+
+      <!-- Classification by Function -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">⚡</span>
+          <h3>Classification by <em>Function</em></h3>
+        </div>
+        <div class="function-grid">
+          <div class="fn-card" style="--c:#ffd6e7">
+            <div class="fn-emoji">🔍</div>
+            <h4>Diagnostic</h4>
+            <p>Detect diseases or medical conditions</p>
+            <div class="fn-examples">ECG · X-ray · MRI · Ultrasound</div>
+          </div>
+          <div class="fn-card" style="--c:#d6f0ff">
+            <div class="fn-emoji">📡</div>
+            <h4>Monitoring</h4>
+            <p>Continuously observe vital signs</p>
+            <div class="fn-examples">Patient Monitor · Pulse Oximeter · BP Monitor</div>
+          </div>
+          <div class="fn-card" style="--c:#d6ffe8">
+            <div class="fn-emoji">💊</div>
+            <h4>Therapeutic</h4>
+            <p>Treat or manage medical conditions</p>
+            <div class="fn-examples">Pacemaker · Defibrillator · Ventilator</div>
+          </div>
+          <div class="fn-card" style="--c:#fff3d6">
+            <div class="fn-emoji">🦾</div>
+            <h4>Rehabilitation</h4>
+            <p>Restore or improve physical function</p>
+            <div class="fn-examples">Prosthetics · Wheelchair · Physiotherapy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Invasiveness -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🩺</span>
+          <h3>Classification by <em>Invasiveness</em></h3>
+        </div>
+        <div class="invasive-spectrum">
+          <div class="inv-bar">
+            <div class="inv-item inv-low">
+              <div class="inv-dot"></div>
+              <h4>Non-Invasive</h4>
+              <p>Does not enter the body or break the skin</p>
+              <div class="inv-ex">ECG · BP Monitor · Pulse Ox · Ultrasound</div>
+            </div>
+            <div class="inv-line"></div>
+            <div class="inv-item inv-mid">
+              <div class="inv-dot"></div>
+              <h4>Minimally Invasive</h4>
+              <p>Enters the body but not implanted</p>
+              <div class="inv-ex">Catheter · Endoscope · Biopsy Needle</div>
+            </div>
+            <div class="inv-line"></div>
+            <div class="inv-item inv-high">
+              <div class="inv-dot"></div>
+              <h4>Invasive</h4>
+              <p>Implanted inside the body</p>
+              <div class="inv-ex">Stents · Pacemakers · Artificial Joints</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Risk -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">⚠️</span>
+          <h3>Classification by <em>Risk Level</em></h3>
+        </div>
+        <div class="risk-wrapper">
+          <div class="risk-col">
+            <div class="risk-header" style="--rc:#d6ffe8">🇺🇸 FDA (USA) / DRAP (PK)</div>
+            <div class="risk-card" style="--rc:#d6ffe8">
+              <div class="risk-badge low">Class I</div>
+              <div class="risk-label">Low Risk</div>
+              <p>Minimal risk, general controls only</p>
+              <div class="risk-ex">Tongue depressor · Bandages · Exam gloves</div>
+            </div>
+            <div class="risk-card" style="--rc:#fff3d6">
+              <div class="risk-badge mid">Class II</div>
+              <div class="risk-label">Moderate Risk</div>
+              <p>Requires special controls</p>
+              <div class="risk-ex">Infusion pump · BP monitor · ECG machine</div>
+            </div>
+            <div class="risk-card" style="--rc:#ffd6e7">
+              <div class="risk-badge high">Class III</div>
+              <div class="risk-label">High Risk</div>
+              <p>Sustains life or is implanted</p>
+              <div class="risk-ex">Pacemaker · Defibrillator · Heart valves</div>
+            </div>
+          </div>
+          <div class="risk-col">
+            <div class="risk-header" style="--rc:#ead6ff">🇬🇧 MDR (UK / EU)</div>
+            <div class="risk-card" style="--rc:#d6ffe8">
+              <div class="risk-badge low">Class I</div>
+              <div class="risk-label">Low Risk</div>
+              <p>Same as FDA Class I</p>
+              <div class="risk-ex">Basic non-contact devices</div>
+            </div>
+            <div class="risk-card" style="--rc:#d6f0ff">
+              <div class="risk-badge mida">Class IIa</div>
+              <div class="risk-label">Low–Medium Risk</div>
+              <p>Short-term or moderate risk</p>
+              <div class="risk-ex">Ultrasound · Hearing aids · Diagnostic catheters</div>
+            </div>
+            <div class="risk-card" style="--rc:#fff3d6">
+              <div class="risk-badge midb">Class IIb</div>
+              <div class="risk-label">Medium–High Risk</div>
+              <p>Higher risk or long-term use</p>
+              <div class="risk-ex">Ventilators · Infusion pumps · Dialysis</div>
+            </div>
+            <div class="risk-card" style="--rc:#ffd6e7">
+              <div class="risk-badge high">Class III</div>
+              <div class="risk-label">High Risk</div>
+              <p>Life-sustaining or implanted</p>
+              <div class="risk-ex">Pacemaker · Heart valves</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Energy Source -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🔋</span>
+          <h3>Classification by <em>Energy Source</em></h3>
+        </div>
+        <div class="energy-grid">
+          <div class="en-card" style="--ec:#ffd6e7">
+            <div class="en-icon">🌡️</div>
+            <h4>Thermal</h4>
+            <p>Uses heat energy</p>
+            <small>Diathermy unit · Incubator</small>
+          </div>
+          <div class="en-card" style="--ec:#d6f0ff">
+            <div class="en-icon">⚙️</div>
+            <h4>Mechanical</h4>
+            <p>Uses mechanical force / motion</p>
+            <small>Ventilator · Dialysis machine</small>
+          </div>
+          <div class="en-card" style="--ec:#fff3d6">
+            <div class="en-icon">⚡</div>
+            <h4>Electrical</h4>
+            <p>Uses electrical energy</p>
+            <small>ECG · Pacemaker</small>
+          </div>
+          <div class="en-card" style="--ec:#ead6ff">
+            <div class="en-icon">☢️</div>
+            <h4>Radiation</h4>
+            <p>Uses ionising / non-ionising radiation</p>
+            <small>X-ray · CT scanner</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classification by Application -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🏥</span>
+          <h3>Classification by <em>Application Area</em></h3>
+        </div>
+        <div class="app-grid">
+          <div class="app-card">❤️<span class="app-name">Cardiology</span><span class="app-ex">ECG, Pacemaker</span></div>
+          <div class="app-card">🧠<span class="app-name">Neurology</span><span class="app-ex">EEG, MRI</span></div>
+          <div class="app-card">🦴<span class="app-name">Orthopedics</span><span class="app-ex">X-ray, Prosthetics</span></div>
+          <div class="app-card">📡<span class="app-name">Radiology</span><span class="app-ex">CT, Ultrasound</span></div>
+          <div class="app-card">🚨<span class="app-name">Intensive Care</span><span class="app-ex">Ventilators, Monitors</span></div>
+          <div class="app-card">🦽<span class="app-name">Rehabilitation</span><span class="app-ex">Wheelchairs, Physio</span></div>
+        </div>
+      </div>
+
+      <!-- Basic Principles -->
+      <div class="principle-block">
+        <div class="classify-title">
+          <span class="classify-icon">🔬</span>
+          <h3>Basic Principles of BM Equipment</h3>
+        </div>
+        <div class="pipeline">
+          <div class="pipe-step" style="--ps:#ffd6e7">
+            <div class="pipe-num">1</div>
+            <div class="pipe-icon">🧬</div>
+            <div class="pipe-label">Patient</div>
+            <div class="pipe-desc">Biological signals: ECG, temp, pressure</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#d6f0ff">
+            <div class="pipe-num">2</div>
+            <div class="pipe-icon">📡</div>
+            <div class="pipe-label">Sensors / Transducers</div>
+            <div class="pipe-desc">Convert biological → electrical signals</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#d6ffe8">
+            <div class="pipe-num">3</div>
+            <div class="pipe-icon">🎛️</div>
+            <div class="pipe-label">Signal Conditioning</div>
+            <div class="pipe-desc">Amplify & filter the signals</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#fff3d6">
+            <div class="pipe-num">4</div>
+            <div class="pipe-icon">💻</div>
+            <div class="pipe-label">Processing</div>
+            <div class="pipe-desc">Analyse & interpret data</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step" style="--ps:#ead6ff">
+            <div class="pipe-num">5</div>
+            <div class="pipe-icon">📺</div>
+            <div class="pipe-label">Display / Recording</div>
+            <div class="pipe-desc">Show results accurately & safely</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- LECTURE 2 -->
+    <section id="lecture2" class="section">
+      <div class="section-header">
+        <span class="section-label">Lecture 2</span>
+        <h2>Quality Assurance & Quality Control</h2>
+      </div>
+
+      <!-- Why QA/QC matters -->
+      <div class="info-banner" style="--b:#d6f0ff;--bt:#5ba8d4">
+        <div class="info-icon">⚠️</div>
+        <div>
+          <h3>Why does it matter?</h3>
+          <p>Equipment malfunctions can cause <strong>incorrect diagnosis, ineffective treatment,</strong> or <strong>patient harm</strong>. QA & QC are essential in healthcare technology management.</p>
+        </div>
+      </div>
+
+      <!-- QA vs QC comparison -->
+      <div class="compare-block">
+        <div class="compare-card" style="--cc:#d6ffe8">
+          <div class="compare-icon">🛡️</div>
+          <h3>Quality Assurance (QA)</h3>
+          <div class="compare-def">A <strong>planned & systematic</strong> process ensuring equipment consistently meets quality & safety standards</div>
+          <div class="compare-tags">
+            <span>✅ Prevents defects</span>
+            <span>🔄 Process-oriented</span>
+            <span>🚀 Proactive</span>
+          </div>
+        </div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-card" style="--cc:#ffd6e7">
+          <div class="compare-icon">🔍</div>
+          <h3>Quality Control (QC)</h3>
+          <div class="compare-def"><strong>Operational techniques & testing</strong> used to verify that equipment meets specified standards</div>
+          <div class="compare-tags">
+            <span>🔎 Detects defects</span>
+            <span>📦 Product-oriented</span>
+            <span>⚡ Reactive</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Defects -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🚨</span>
+          <h3>Common Defects in Medical Equipment</h3>
+        </div>
+        <div class="defect-list">
+          <div class="defect-item" style="--dc:#ffd6e7">
+            <span class="defect-icon">⚡</span>
+            <div>
+              <strong>Electrical Defects</strong>
+              <p>Power issues, line noise (noise from supply)</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#d6f0ff">
+            <span class="defect-icon">⚙️</span>
+            <div>
+              <strong>Mechanical Defects</strong>
+              <p>Motor failure, wear and tear</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#d6ffe8">
+            <span class="defect-icon">💻</span>
+            <div>
+              <strong>Software Defects</strong>
+              <p>System crashes, firmware bugs</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#fff3d6">
+            <span class="defect-icon">📊</span>
+            <div>
+              <strong>Measurement Errors</strong>
+              <p>Inaccurate readings, signal errors</p>
+            </div>
+          </div>
+          <div class="defect-item" style="--dc:#ead6ff">
+            <span class="defect-icon">🌧️</span>
+            <div>
+              <strong>Environmental Damage</strong>
+              <p>Corrosion, dust accumulation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">📊</span>
+          <h3>Key Performance Indicators (KPIs)</h3>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card" style="--kc:#ffd6e7">
+            <div class="kpi-icon">🎯</div>
+            <h4>Precision</h4>
+            <p>Ability to produce <strong>consistent</strong> results repeatedly</p>
+          </div>
+          <div class="kpi-card" style="--kc:#d6f0ff">
+            <div class="kpi-icon">✅</div>
+            <h4>Accuracy</h4>
+            <p>Closeness of measurement to the <strong>true value</strong></p>
+          </div>
+          <div class="kpi-card" style="--kc:#d6ffe8">
+            <div class="kpi-icon">🔬</div>
+            <h4>Sensitivity</h4>
+            <p>Ability to detect <strong>small changes</strong> in measurement</p>
+          </div>
+          <div class="kpi-card" style="--kc:#fff3d6">
+            <div class="kpi-icon">🔁</div>
+            <h4>Repeatability</h4>
+            <p>Same result under <strong>identical conditions</strong></p>
+          </div>
+          <div class="kpi-card" style="--kc:#ead6ff">
+            <div class="kpi-icon">⏱️</div>
+            <h4>Response Time</h4>
+            <p>Time taken to <strong>respond to an input</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Methods to test KPIs -->
+      <div class="classify-block">
+        <div class="classify-title">
+          <span class="classify-icon">🧪</span>
+          <h3>Methods to Test KPIs</h3>
+        </div>
+        <div class="method-steps">
+          <div class="method-step" style="--ms:#ffd6e7">
+            <div class="ms-num">1</div>
+            <div class="ms-content">
+              <strong>Functional Testing</strong>
+              <p>Verify the device performs its intended function correctly</p>
+            </div>
+          </div>
+          <div class="method-step" style="--ms:#d6f0ff">
+            <div class="ms-num">2</div>
+            <div class="ms-content">
+              <strong>Electrical Safety Testing</strong>
+              <p>Check leakage current, insulation resistance & grounding</p>
+            </div>
+          </div>
+          <div class="method-step" style="--ms:#d6ffe8">
+            <div class="ms-num">3</div>
+            <div class="ms-content">
+              <strong>Comparison with Reference Standards</strong>
+              <p>Calibrate against gold-standard known-value instruments</p>
+            </div>
+          </div>
+          <div class="method-step" style="--ms:#fff3d6">
+            <div class="ms-num">4</div>
+            <div class="ms-content">
+              <strong>Use of Analysers & Simulators</strong>
+              <p>Simulate patient signals to test device response</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         EXAM PREP SECTION
+    ════════════════════════════════════════════ -->
+    <section id="exam" class="section">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--purple)">Midterm Prep</span>
+        <h2>Practice Questions<br/><em>&amp; Model Answers</em></h2>
+        <p class="exam-subtitle">Click any question to reveal the answer 👇</p>
+      </div>
+
+      <!-- TABS -->
+      <div class="exam-tabs">
+        <button class="exam-tab active" data-panel="short">✏️ Short Answer</button>
+        <button class="exam-tab" data-panel="long">📝 Long Answer</button>
+        <button class="exam-tab" data-panel="debate">🗣️ Debate Questions</button>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="exam-progress-wrap">
+        <div class="exam-progress-label">
+          <span class="prog-done">0</span> of <span class="prog-total">0</span> questions answered
+        </div>
+        <div class="exam-progress-track"><div class="exam-progress-fill"></div></div>
+      </div>
+
+      <!-- ─── SHORT ANSWER PANEL ─── -->
+      <div class="exam-panel active" id="panel-short">
+
+        <!-- Q1 -->
+        <div class="eq-card" style="--eq:#ffd6e7">
+          <button class="eq-trigger">
+            <span class="eq-num">Q1</span>
+            <span class="eq-q">Define Biomedical Equipment. How does it apply principles from different fields to support patient care?</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p>Biomedical equipment refers to devices used in healthcare for the <strong>diagnosis, monitoring, treatment, and rehabilitation</strong> of patients. It combines the principles of <strong>engineering, biology, physics, and medicine</strong> to support clinical decision-making and patient care.</p>
+            <div class="eq-chips">
+              <div class="eq-chip">⚙️ Engineering</div>
+              <div class="eq-chip">🧬 Biology</div>
+              <div class="eq-chip">⚛️ Physics</div>
+              <div class="eq-chip">💊 Medicine</div>
+            </div>
+            <div class="eq-tip">💡 Think: any device in a hospital that measures, monitors, treats or restores — that's biomedical equipment.</div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="eq-card" style="--eq:#d6f0ff">
+          <button class="eq-trigger">
+            <span class="eq-num">Q2</span>
+            <span class="eq-q">What are the four primary functions used to classify biomedical equipment? Provide one example for each.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-grid-2">
+              <div class="eq-mini" style="background:#ffd6e7">🔍 <strong>Diagnostic</strong><br/>Detects diseases<br/><em>X-ray, MRI, Ultrasound</em></div>
+              <div class="eq-mini" style="background:#d6f0ff">📡 <strong>Monitoring</strong><br/>Continuously observes vitals<br/><em>Patient monitor, Pulse oximeter</em></div>
+              <div class="eq-mini" style="background:#d6ffe8">💊 <strong>Therapeutic</strong><br/>Treats or manages conditions<br/><em>Ventilator, Infusion pump, Pacemaker</em></div>
+              <div class="eq-mini" style="background:#fff3d6">🦾 <strong>Rehabilitation</strong><br/>Restores physical function<br/><em>Wheelchair, Prosthetics</em></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="eq-card" style="--eq:#d6ffe8">
+          <button class="eq-trigger">
+            <span class="eq-num">Q3</span>
+            <span class="eq-q">Distinguish between Invasive and Non-Invasive devices. Give two examples of "Minimally Invasive" equipment.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-spectrum">
+              <div class="eqs-item" style="background:#d6ffe8">
+                <div class="eqs-dot" style="background:#52c77a"></div>
+                <strong>Non-Invasive</strong>
+                <p>Does not enter the body or break the skin</p>
+                <span class="eqs-ex">ECG · BP Monitor</span>
+              </div>
+              <div class="eqs-arrow">→</div>
+              <div class="eqs-item eqs-highlight" style="background:#fff3d6;outline:2px solid #f0a83c">
+                <div class="eqs-dot" style="background:#f0a83c"></div>
+                <strong>Minimally Invasive ⭐</strong>
+                <p>Enters body but not permanently implanted</p>
+                <span class="eqs-ex">Catheter · Endoscope · Biopsy Needle</span>
+              </div>
+              <div class="eqs-arrow">→</div>
+              <div class="eqs-item" style="background:#ffd6e7">
+                <div class="eqs-dot" style="background:#e85d87"></div>
+                <strong>Invasive</strong>
+                <p>Permanently implanted inside the body</p>
+                <span class="eqs-ex">Stents · Pacemakers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="eq-card" style="--eq:#fff3d6">
+          <button class="eq-trigger">
+            <span class="eq-num">Q4</span>
+            <span class="eq-q">Explain the FDA Risk Classification. What characterizes a Class III device compared to a Class I device?</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-grid-3">
+              <div class="eq-risk" style="background:#d6ffe8">
+                <span class="eq-badge" style="background:#52c77a">Class I</span>
+                <strong>Low Risk</strong>
+                <p>Minimal risk, general controls only</p>
+                <em>Tongue depressor, Bandages, Exam gloves</em>
+              </div>
+              <div class="eq-risk" style="background:#fff3d6">
+                <span class="eq-badge" style="background:#f0a83c">Class II</span>
+                <strong>Moderate Risk</strong>
+                <p>Requires special controls</p>
+                <em>Infusion pump, BP monitor, ECG machine</em>
+              </div>
+              <div class="eq-risk" style="background:#ffd6e7">
+                <span class="eq-badge" style="background:#e85d87">Class III</span>
+                <strong>High Risk</strong>
+                <p>Sustains life or is implanted — most stringent review</p>
+                <em>Pacemaker, Heart valves, Defibrillator</em>
+              </div>
+            </div>
+            <div class="eq-tip">💡 Key difference: Class I poses minimal risk (no special controls needed); Class III devices can cause serious harm if they fail and require PMA (Pre-Market Approval).</div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="eq-card" style="--eq:#ead6ff">
+          <button class="eq-trigger">
+            <span class="eq-num">Q5</span>
+            <span class="eq-q">What is the difference between Class IIa and Class IIb under the MDR (UK/EU) classification?</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-compare">
+              <div class="eqc-side" style="background:#d6f0ff">
+                <span class="eq-badge" style="background:#5ba8d4">Class IIa</span>
+                <strong>Low–Medium Risk</strong>
+                <p>Short-term or moderate-risk devices</p>
+                <em>Hearing aids, Ultrasound, Diagnostic catheters</em>
+              </div>
+              <div class="eqc-vs">VS</div>
+              <div class="eqc-side" style="background:#ead6ff">
+                <span class="eq-badge" style="background:#a06dd4">Class IIb</span>
+                <strong>Medium–High Risk</strong>
+                <p>Long-term use or higher-risk applications</p>
+                <em>Infusion pumps, Ventilators, Dialysis machines</em>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="eq-card" style="--eq:#ffd6e7">
+          <button class="eq-trigger">
+            <span class="eq-num">Q6</span>
+            <span class="eq-q">Identify four types of energy sources used to classify biomedical devices and provide an example for each.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-grid-2">
+              <div class="eq-mini" style="background:#ffd6e7">🌡️ <strong>Thermal</strong><br/>Uses heat energy<br/><em>Diathermy unit, Incubator</em></div>
+              <div class="eq-mini" style="background:#fff3d6">⚡ <strong>Electrical</strong><br/>Uses electrical energy<br/><em>ECG machine, Pacemaker</em></div>
+              <div class="eq-mini" style="background:#d6f0ff">⚙️ <strong>Mechanical</strong><br/>Uses mechanical force or motion<br/><em>Ventilator, Dialysis machine</em></div>
+              <div class="eq-mini" style="background:#ead6ff">☢️ <strong>Radiation</strong><br/>Uses ionising/non-ionising radiation<br/><em>CT scanner, X-ray</em></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="eq-card" style="--eq:#d6ffe8">
+          <button class="eq-trigger">
+            <span class="eq-num">Q7</span>
+            <span class="eq-q">List three common defects found in medical equipment that could lead to incorrect diagnosis or patient harm.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-defects">
+              <div class="eq-defect" style="background:#ffd6e7">⚡ <strong>Electrical defects</strong> — power issues, line noise from supply</div>
+              <div class="eq-defect" style="background:#d6f0ff">⚙️ <strong>Mechanical defects</strong> — motor failure, wear and tear</div>
+              <div class="eq-defect" style="background:#d6ffe8">💻 <strong>Software defects</strong> — system crashes, firmware bugs</div>
+              <div class="eq-defect" style="background:#fff3d6">📊 <strong>Measurement errors</strong> — inaccurate readings, signal drift</div>
+              <div class="eq-defect" style="background:#ead6ff">🌧️ <strong>Environmental damage</strong> — corrosion, dust accumulation</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="eq-card" style="--eq:#d6f0ff">
+          <button class="eq-trigger">
+            <span class="eq-num">Q8</span>
+            <span class="eq-q">Define Sensitivity and Response Time in the context of KPIs for medical devices.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p>🔬 <strong>Sensitivity</strong> — the ability of a device to detect <strong>small changes</strong> in the input signal. Critical for devices that track subtle biological changes (e.g., blood glucose fluctuations).</p>
+            <p style="margin-top:12px">⏱️ <strong>Response Time</strong> — the time taken for a device to <strong>respond to an input change</strong>. Critical in monitoring devices where delays could result in missed alarms or late interventions.</p>
+            <div class="eq-tip">💡 Both are tested using functional testing or analysers &amp; simulators.</div>
+          </div>
+        </div>
+
+      </div><!-- end panel-short -->
+
+      <!-- ─── LONG ANSWER PANEL ─── -->
+      <div class="exam-panel" id="panel-long">
+
+        <!-- L1 -->
+        <div class="eq-card" style="--eq:#d6f0ff">
+          <button class="eq-trigger">
+            <span class="eq-num">L1</span>
+            <span class="eq-q">The Instrumentation Chain: How is a biological signal (like an ECG) converted into a readable format? Explain the roles of Sensor/Transducer, Signal Conditioning, and Processing.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p>The basic principle uses a <strong>sequence of stages</strong> to make biological data usable:</p>
+
+            <!-- Inline pipeline diagram -->
+            <div class="eq-pipeline">
+              <div class="eq-pipe-node" style="background:#ffd6e7">
+                <div class="epn-icon">🧬</div>
+                <div class="epn-label">Patient</div>
+                <div class="epn-sub">Biological signals: ECG, temp, pressure</div>
+              </div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#d6f0ff">
+                <div class="epn-icon">📡</div>
+                <div class="epn-label">Sensors / Transducers</div>
+                <div class="epn-sub">Convert biological → electrical signals</div>
+              </div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#d6ffe8">
+                <div class="epn-icon">🎛️</div>
+                <div class="epn-label">Signal Conditioning</div>
+                <div class="epn-sub">Amplify &amp; filter to remove noise</div>
+              </div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#fff3d6">
+                <div class="epn-icon">💻</div>
+                <div class="epn-label">Processing</div>
+                <div class="epn-sub">Analyse &amp; convert to usable format</div>
+              </div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#ead6ff">
+                <div class="epn-icon">📺</div>
+                <div class="epn-label">Display / Recording</div>
+                <div class="epn-sub">Show results accurately &amp; safely</div>
+              </div>
+            </div>
+
+            <div class="eq-detail-list">
+              <div class="eq-detail" style="background:#d6f0ff"><strong>1. Sensors/Transducers</strong> — Convert biological signals (temperature, ECG) into electrical signals.</div>
+              <div class="eq-detail" style="background:#d6ffe8"><strong>2. Signal Conditioning</strong> — Amplifies &amp; filters raw electrical signal to remove noise. This stage makes the signal <em>usable</em>.</div>
+              <div class="eq-detail" style="background:#fff3d6"><strong>3. Processing</strong> — The signal is analysed &amp; converted into a suitable format for display.</div>
+              <div class="eq-detail" style="background:#ead6ff"><strong>4. Display/Recording</strong> — Final result displayed while ensuring: patient safety (biocompatibility, electrical isolation) and device reliability (accuracy, precision, sensitivity).</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- L2 -->
+        <div class="eq-card" style="--eq:#d6ffe8">
+          <button class="eq-trigger">
+            <span class="eq-num">L2</span>
+            <span class="eq-q">Quality Assurance vs. Quality Control: Compare and contrast QA and QC in a healthcare setting. Why is QA "proactive" while QC is "reactive"?</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <!-- Visual comparison table -->
+            <div class="eq-table-wrap">
+              <table class="eq-table">
+                <thead>
+                  <tr><th>Dimension</th><th style="color:#52c77a">🛡️ Quality Assurance</th><th style="color:#e85d87">🔍 Quality Control</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Focus</td><td>Preventing defects before they occur</td><td>Detecting defects that already exist</td></tr>
+                  <tr><td>Orientation</td><td>Process-oriented</td><td>Product-oriented</td></tr>
+                  <tr><td>Approach</td><td>Proactive — acts during planning &amp; operation</td><td>Reactive — acts after production/use</td></tr>
+                  <tr><td>Methods</td><td>Systematic planning, SOP creation, audits</td><td>Functional testing, electrical safety testing, simulators</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="eq-compare">
+              <div class="eqc-side" style="background:#d6ffe8">
+                <strong>🛡️ QA — Proactive</strong>
+                <p>Implements systematic activities to ensure standards are consistently met <em>during preparation &amp; operation</em>. Focuses on proper planning &amp; control of the systems used to manage equipment.</p>
+              </div>
+              <div class="eqc-vs">VS</div>
+              <div class="eqc-side" style="background:#ffd6e7">
+                <strong>🔍 QC — Reactive</strong>
+                <p>Relies on inspection, measurement, and testing (electrical safety or functional tests) to identify failure <em>after the device is produced or used</em>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- L3 -->
+        <div class="eq-card" style="--eq:#fff3d6">
+          <button class="eq-trigger">
+            <span class="eq-num">L3</span>
+            <span class="eq-q">Sensor Selection (CLO-5): You are selecting a sensor for continuous heart rate monitoring. What KPIs must you consider, and how would you test each?</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p>When choosing a sensor/transducer to convert biological signals into electrical signals, evaluate these <strong>5 KPIs</strong>:</p>
+            <div class="eq-kpi-list">
+              <div class="eq-kpi-row" style="background:#ffd6e7">
+                <div class="ekr-name">🎯 Precision</div>
+                <div class="ekr-def">Consistent results over multiple readings</div>
+                <div class="ekr-test">Test: Comparison with reference standards / Analysers &amp; simulators</div>
+              </div>
+              <div class="eq-kpi-row" style="background:#d6f0ff">
+                <div class="ekr-name">✅ Accuracy</div>
+                <div class="ekr-def">Output as close as possible to the true value</div>
+                <div class="ekr-test">Test: Functional testing / Reference standards / Analysers &amp; simulators</div>
+              </div>
+              <div class="eq-kpi-row" style="background:#d6ffe8">
+                <div class="ekr-name">🔬 Sensitivity</div>
+                <div class="ekr-def">Detect very small changes in patient's condition</div>
+                <div class="ekr-test">Test: Functional testing</div>
+              </div>
+              <div class="eq-kpi-row" style="background:#fff3d6">
+                <div class="ekr-name">🔁 Repeatability</div>
+                <div class="ekr-def">Same result under identical conditions over long periods (no drift)</div>
+                <div class="ekr-test">Test: Electrical safety testing / Functional testing</div>
+              </div>
+              <div class="eq-kpi-row" style="background:#ead6ff">
+                <div class="ekr-name">⏱️ Response Time</div>
+                <div class="ekr-def">Fast response to alert medical staff if needed</div>
+                <div class="ekr-test">Test: Analysers &amp; simulators / Functional testing</div>
+              </div>
+            </div>
+            <div class="eq-tip">⚠️ <strong>Potential issues:</strong> Line noise (electrical interference distorts signal) &amp; Environmental damage (corrosion/dust affect sensor integrity).</div>
+          </div>
+        </div>
+
+        <!-- L4 -->
+        <div class="eq-card" style="--eq:#ead6ff">
+          <button class="eq-trigger">
+            <span class="eq-num">L4</span>
+            <span class="eq-q">Risk and Regulation: Using the example of an Infusion Pump, explain its classification under FDA and MDR systems and justify why it carries higher risk than a tongue depressor.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p><strong>Why classify?</strong> Classification ensures patient safety by identifying high-risk devices, simplifies regulation, and supports clinical training.</p>
+            <div class="eq-casestudy">
+              <div class="ecs-header">💉 Case Study: Infusion Pump</div>
+              <div class="ecs-body">
+                <div class="ecs-tags">
+                  <span style="background:#fff3d6">🇺🇸 FDA → <strong>Class II</strong> (Moderate Risk)</span>
+                  <span style="background:#ead6ff">🇬🇧 MDR (EU) → <strong>Class IIb</strong> (Medium–High Risk)</span>
+                </div>
+              </div>
+            </div>
+            <p style="margin-top:16px"><strong>Why higher risk than a tongue depressor?</strong></p>
+            <div class="eq-detail-list">
+              <div class="eq-detail" style="background:#ffd6e7">⚙️ <strong>Complexity</strong> — Electrical &amp; mechanical device susceptible to software crashes or line noise; a tongue depressor is a simple manual tool.</div>
+              <div class="eq-detail" style="background:#d6f0ff">🩺 <strong>Invasiveness</strong> — Pumps use minimally invasive catheters to deliver fluids into the body; tongue depressors are non-invasive.</div>
+              <div class="eq-detail" style="background:#d6ffe8">⚠️ <strong>Consequence of Failure</strong> — A defective pump causes life-threatening medication errors (overdose/underdose); a broken tongue depressor poses "minimal risk".</div>
+              <div class="eq-detail" style="background:#fff3d6">📊 <strong>KPI Demands</strong> — The pump requires strict Accuracy, Repeatability, and Response Time to ensure patient safety.</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end panel-long -->
+
+      <!-- ─── DEBATE PANEL ─── -->
+      <div class="exam-panel" id="panel-debate">
+
+        <!-- Intro banner for debate section -->
+        <div class="eq-debate-intro">
+          <div class="edi-icon">🗣️</div>
+          <div>
+            <strong>Class Debate Questions</strong>
+            <p>These scenarios were debated in class. Expand each one to review your notes and the key classification concepts to apply.</p>
+          </div>
+        </div>
+
+        <!-- Debate 1 - Lab Wed 7 Jan -->
+        <div class="eq-card eq-debate-card" style="--eq:#ffd6e7">
+          <button class="eq-trigger">
+            <span class="eq-num eq-debate-num">Lab · 7 Jan</span>
+            <span class="eq-q">A patient has diabetes type II, hypertension, and T4 autism. Treat them without conventional medication, therapies, or medical procedures — using only biomedical devices.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p>This is a <strong>design &amp; classification debate</strong>. Apply your knowledge of functional classification and KPIs. A model solution could propose:</p>
+            <div class="eq-grid-2">
+              <div class="eq-mini" style="background:#ffd6e7">💓 <strong>Automated Insulin Pump</strong><br/>Therapeutic · Invasive/Minimally Invasive<br/>FDA: Class III</div>
+              <div class="eq-mini" style="background:#d6f0ff">📡 <strong>Continuous BP Monitor</strong><br/>Monitoring · Non-invasive<br/>FDA: Class II</div>
+              <div class="eq-mini" style="background:#d6ffe8">🧠 <strong>Neurofeedback / BCI Device</strong><br/>Therapeutic (autism symptom suppression)<br/>FDA: Class IIb–III</div>
+              <div class="eq-mini" style="background:#fff3d6">📊 <strong>Wearable Biosensor Suite</strong><br/>Monitoring · Non-invasive<br/>FDA: Class II</div>
+            </div>
+            <div class="eq-note-box">
+              <strong>🌟 Key Note to Self — Classification Angles:</strong>
+              <table class="eq-table" style="margin-top:10px">
+                <thead><tr><th>Device</th><th>Functional Class</th><th>Energy Source</th></tr></thead>
+                <tbody>
+                  <tr><td>Insulin pump sensor</td><td>Therapeutic</td><td>Electrical / Mechanical</td></tr>
+                  <tr><td>BP monitor</td><td>Monitoring</td><td>Mechanical / Electrical</td></tr>
+                  <tr><td>Neurofeedback device</td><td>Therapeutic</td><td>Electrical</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Debate 2 - Theory Thu 8 Jan -->
+        <div class="eq-card eq-debate-card" style="--eq:#d6f0ff">
+          <button class="eq-trigger">
+            <span class="eq-num eq-debate-num">Theory · 8 Jan</span>
+            <span class="eq-q">Find a disease from the 1820s and provide a solution using today's technology. How many lives would you save?</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p>This tests your understanding of the <strong>basic principle / instrumentation chain</strong> applied to a historical problem.</p>
+            <div class="eq-casestudy">
+              <div class="ecs-header">🏺 Example: Cholera Outbreak (1820s)</div>
+              <div class="ecs-body">
+                <p>Deploy a <strong>portable electrolyte monitoring system</strong> using modern 2026 instrumentation.</p>
+              </div>
+            </div>
+
+            <!-- Block diagram -->
+            <div class="eq-pipeline" style="margin-top:16px">
+              <div class="eq-pipe-node" style="background:#ffd6e7"><div class="epn-icon">🧬</div><div class="epn-label">Patient</div><div class="epn-sub">Electrolyte levels in blood</div></div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#d6f0ff"><div class="epn-icon">📡</div><div class="epn-label">Sensor</div><div class="epn-sub">Ion-selective electrode detects Na⁺, K⁺</div></div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#d6ffe8"><div class="epn-icon">🎛️</div><div class="epn-label">Signal Conditioning ⭐</div><div class="epn-sub">Amplifies &amp; filters — makes signal usable</div></div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#fff3d6"><div class="epn-icon">💻</div><div class="epn-label">Processing</div><div class="epn-sub">Analyse dehydration severity</div></div>
+              <div class="eq-pipe-arr">→</div>
+              <div class="eq-pipe-node" style="background:#ead6ff"><div class="epn-icon">📱</div><div class="epn-label">Display</div><div class="epn-sub">Alert &amp; recommend IV rehydration</div></div>
+            </div>
+            <div class="eq-tip">💡 The <strong>Signal Conditioning stage</strong> is what makes the signal usable by amplifying and filtering the raw biological data.</div>
+          </div>
+        </div>
+
+        <!-- Debate 3 - Lab Wed 14 Jan -->
+        <div class="eq-card eq-debate-card" style="--eq:#d6ffe8">
+          <button class="eq-trigger">
+            <span class="eq-num eq-debate-num">Lab · 14 Jan</span>
+            <span class="eq-q">Are the following biomedical practices ethical or unethical? Discuss with reference to classification and QA/QC: Tissue Engineering, Cloning, Bioprinting, Humanoids, Prosthetics, Organ/Blood Donation, Animal Trials, Human Trials, Bone Marrow Transplant, Stem Cell Therapy. (Limited to Asia)</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <p>This debate connects ethics to <strong>classification, QA/QC, and KPIs</strong>. Use the note-to-self table and key concepts below:</p>
+
+            <div class="eq-note-box">
+              <strong>🌟 Key Classification Reference (from your notes):</strong>
+              <table class="eq-table" style="margin-top:10px">
+                <thead><tr><th>Debate Topic</th><th>Functional Classification</th><th>Energy Source</th></tr></thead>
+                <tbody>
+                  <tr><td>Prosthetics</td><td>Rehabilitation equipment</td><td>Mechanical / Electrical</td></tr>
+                  <tr><td>Organ / Blood donation</td><td>Therapeutic</td><td>Mechanical (pump)</td></tr>
+                  <tr><td>Stem cell therapy</td><td>Therapeutic</td><td>Thermal (storage/incubator)</td></tr>
+                  <tr><td>Humanoids / Robotics</td><td>Rehabilitation / Therapeutic</td><td>Electrical / Mechanical</td></tr>
+                  <tr><td>Bone marrow transplant</td><td>Therapeutic</td><td>Electrical (monitoring)</td></tr>
+                  <tr><td>Bioprinting / Cloning</td><td>Therapeutic</td><td>Thermal / Electrical</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="eq-detail-list" style="margin-top:16px">
+              <div class="eq-detail" style="background:#ffd6e7"><strong>01 Animal &amp; Human Trials</strong><br/><em>QA:</em> proactive, process-oriented — prevent safety breaches during trial.<br/><em>QC:</em> product-oriented, reactive — detect equipment defects during trials.<br/><strong>Example Q:</strong> "In Human Trials for a prosthetic limb, QA is more critical than QC because preventing malfunction through proper planning is safer than detecting failure after the device has already been used."</div>
+              <div class="eq-detail" style="background:#d6f0ff"><strong>02 Bioprinting / Tissue Engineering</strong><br/>The principle: converting biological data into printer instructions.<br/><em>KPIs:</em> Precision (consistent biological structures) + Accuracy (closeness to intended anatomical design).</div>
+              <div class="eq-detail" style="background:#d6ffe8"><strong>03 Humanoids &amp; Prosthetics</strong><br/>Sensors &amp; transducers convert biological/environmental signals to electrical signals (front end).<br/><em>Critical KPI:</em> Response Time — the prosthetic must react fast enough to be functional for the patient.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Debate Q1: Classification of Diabetes Management -->
+        <div class="eq-card eq-debate-card" style="--eq:#fff3d6">
+          <button class="eq-trigger">
+            <span class="eq-num eq-debate-num">D·Q1</span>
+            <span class="eq-q">Scenario: You propose an automated insulin pump to treat a Type II diabetic patient without conventional medication. Classify this device based on Function, Invasiveness, and FDA Risk Level.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-grid-3">
+              <div class="eq-risk" style="background:#d6f0ff">
+                <span class="eq-badge" style="background:#5ba8d4">Function</span>
+                <strong>Therapeutic</strong>
+                <p>Used to treat or manage a medical condition (diabetes)</p>
+              </div>
+              <div class="eq-risk" style="background:#fff3d6">
+                <span class="eq-badge" style="background:#f0a83c">Invasiveness</span>
+                <strong>Invasive / Minimally Invasive</strong>
+                <p>Invasive if the cannula is implanted; Minimally invasive if it enters the body but is not permanent</p>
+              </div>
+              <div class="eq-risk" style="background:#ffd6e7">
+                <span class="eq-badge" style="background:#e85d87">FDA Risk</span>
+                <strong>Class III — High Risk</strong>
+                <p>Life-sustaining device where failure (overdose/underdose) could cause significant harm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Debate Q3: QA/QC in Tissue Engineering -->
+        <div class="eq-card eq-debate-card" style="--eq:#ead6ff">
+          <button class="eq-trigger">
+            <span class="eq-num eq-debate-num">D·Q3</span>
+            <span class="eq-q">Scenario: Your lab is bioprinting skin for burn victims. Differentiate between the QA and QC measures you would take.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-compare">
+              <div class="eqc-side" style="background:#d6ffe8">
+                <strong>🛡️ QA (Process-oriented)</strong>
+                <p>Implement a <em>proactive, planned system</em> to ensure the printing environment (temperature, sterility) consistently meets safety standards to <strong>prevent defects</strong> before they occur.</p>
+              </div>
+              <div class="eqc-vs">VS</div>
+              <div class="eqc-side" style="background:#ffd6e7">
+                <strong>🔍 QC (Product-oriented)</strong>
+                <p>Perform <em>reactive operational tests</em> on the final printed tissue to <strong>detect defects</strong> or structural failures before it is applied to a patient.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Debate Q4: KPIs for Prosthetics -->
+        <div class="eq-card eq-debate-card" style="--eq:#ffd6e7">
+          <button class="eq-trigger">
+            <span class="eq-num eq-debate-num">D·Q4</span>
+            <span class="eq-q">Scenario: You are developing a robotic prosthetic limb for a patient in Asia. Identify the three most critical KPIs required to ensure the limb mimics natural movement accurately.</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-kpi-list">
+              <div class="eq-kpi-row" style="background:#d6ffe8">
+                <div class="ekr-name">🔬 Sensitivity</div>
+                <div class="ekr-def">The sensors must detect small changes in the user's muscle signals to translate intent into movement.</div>
+              </div>
+              <div class="eq-kpi-row" style="background:#fff3d6">
+                <div class="ekr-name">⏱️ Response Time</div>
+                <div class="ekr-def">The time for the mechanical limb to respond to user input — crucial for balance and natural movement.</div>
+              </div>
+              <div class="eq-kpi-row" style="background:#ffd6e7">
+                <div class="ekr-name">🔁 Repeatability</div>
+                <div class="ekr-def">The prosthetic must produce the same movement result under identical command conditions consistently.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Debate Q5: Human Trials BCI -->
+        <div class="eq-card eq-debate-card" style="--eq:#d6f0ff">
+          <button class="eq-trigger">
+            <span class="eq-num eq-debate-num">D·Q5</span>
+            <span class="eq-q">Scenario: You are conducting Human Trials for a new brain-computer interface (Neurology). Based on MDR (UK/EU) Classification, why would this equipment likely fall under Class IIb?</span>
+            <span class="eq-chevron">▾</span>
+          </button>
+          <div class="eq-body">
+            <div class="eq-compare">
+              <div class="eqc-side" style="background:#d6f0ff">
+                <span class="eq-badge" style="background:#5ba8d4">Class IIa</span>
+                <strong>Why NOT IIa?</strong>
+                <p>Class IIa is for short-term, moderate-risk devices. A BCI involves sustained, long-term interaction with the central nervous system — far beyond "short-term".</p>
+              </div>
+              <div class="eqc-vs">→</div>
+              <div class="eqc-side" style="background:#ead6ff">
+                <span class="eq-badge" style="background:#a06dd4">Class IIb ✓</span>
+                <strong>Why IIb?</strong>
+                <p>Designated for medium-high risk devices intended for <strong>long-term use or higher-risk applications</strong>. BCIs and deep-brain stimulators involve higher risk and sustained CNS interaction.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end panel-debate -->
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>BM 531 · Biomedical Instrumentation · Study Notes</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
